@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/21"
+      fx:controller="clinicaveterinaria.meupetemdia.controller.LoginController"
+      styleClass="root-container"
+      alignment="CENTER"
+      spacing="30"
+      prefHeight="768.0"
+      prefWidth="1024.0">
+
+    <!-- CABEÇALHO COM LOGO E TÍTULO -->
+    <VBox alignment="CENTER" spacing="10">
+        <ImageView fx:id="imgLogo" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
+            <!-- Adicione sua logo aqui -->
+            <!-- <image><Image url="@/images/logo.png" /></image> -->
+        </ImageView>
+
+        <Label fx:id="lblTitulo" text="Meu Pet em Dia" styleClass="app-title"/>
+        <Label fx:id="lblSubtitulo" text="Sistema de Gestão Veterinária" styleClass="section-title"/>
+    </VBox>
+
+    <!-- CARD DO FORMULÁRIO DE LOGIN -->
+    <VBox fx:id="vboxFormulario" styleClass="card" alignment="CENTER" spacing="15" maxWidth="400" prefWidth="400">
+        <padding>
+            <Insets top="30" right="40" bottom="30" left="40"/>
+        </padding>
+
+        <!-- TÍTULO DO FORMULÁRIO -->
+        <Label text="Entrar no Sistema" styleClass="screen-title"/>
+
+        <!-- CAMPO E-MAIL -->
+        <VBox spacing="5">
+            <Label text="E-mail:" styleClass="form-label"/>
+            <TextField fx:id="txtEmail" promptText="Digite seu e-mail" styleClass="text-field"/>
+            <Label fx:id="lblErroEmail" styleClass="error-label" visible="false" managed="false"/>
+        </VBox>
+
+        <!-- CAMPO SENHA -->
+        <VBox spacing="5">
+            <Label text="Senha:" styleClass="form-label"/>
+            <PasswordField fx:id="txtSenha" promptText="Digite sua senha" styleClass="password-field"/>
+            <Label fx:id="lblErroSenha" styleClass="error-label" visible="false" managed="false"/>
+        </VBox>
+
+        <!-- BOTÃO ENTRAR -->
+        <Button fx:id="btnEntrar" text="Entrar" styleClass="primary-button" maxWidth="Infinity"
+                onAction="#handleLogin">
+            <VBox.margin>
+                <Insets top="10"/>
+            </VBox.margin>
+        </Button>
+
+        <!-- MENSAGEM DE ERRO GERAL -->
+        <Label fx:id="lblErroGeral" styleClass="error-label" wrapText="true" textAlignment="CENTER"
+               visible="false" managed="false"/>
+
+        <!-- INDICADOR DE CARREGAMENTO -->
+        <ProgressIndicator fx:id="progressIndicator" prefHeight="40.0" prefWidth="40.0"
+                           visible="false" managed="false"/>
+    </VBox>
+
+    <!-- RODAPÉ (OPCIONAL) -->
+    <Label text="© 2025 Clínica Veterinária - Todos os direitos reservados"
+           styleClass="info-label">
+        <VBox.margin>
+            <Insets top="30"/>
+        </VBox.margin>
+    </Label>
+
+</VBox>

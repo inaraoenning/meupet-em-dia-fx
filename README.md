@@ -44,7 +44,7 @@ ClinicaVeterinaria/
 │       │                   └── AlertUtil.java
 │       │
 │       └── resources/
-│           ├── view/
+│           ├── fxml/
 │           │   ├── login.fxml
 │           │   ├── menuPrincipal.fxml
 │           │   ├── cadastroDonos.fxml

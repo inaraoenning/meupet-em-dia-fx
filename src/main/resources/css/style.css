@@ -1,0 +1,316 @@
+/* ======================================
+   CLÍNICA VETERINÁRIA - STYLE.CSS
+   Paleta: #093b2d | #fcfdf8 | #cdac89
+   ====================================== */
+
+/* ============ CORES GLOBAIS ============ */
+.root {
+    -fx-primary-color: #093b2d;
+    -fx-background-light: #fcfdf8;
+    -fx-accent-color: #cdac89;
+    -fx-text-dark: #093b2d;
+    -fx-text-light: #fcfdf8;
+    -fx-error-color: #d32f2f;
+    -fx-success-color: #388e3c;
+}
+
+/* ============ FUNDO PRINCIPAL ============ */
+.root-container {
+    -fx-background-color: #fcfdf8;
+}
+
+/* ============ CABEÇALHOS E TÍTULOS ============ */
+.header-bar {
+    -fx-background-color: #093b2d;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+.app-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fcfdf8;
+}
+
+.screen-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #093b2d;
+    -fx-padding: 10 0 20 0;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #093b2d;
+    -fx-padding: 10 0;
+}
+
+/* ============ LABELS E TEXTOS ============ */
+.label {
+    -fx-text-fill: #093b2d;
+    -fx-font-size: 14px;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #093b2d;
+}
+
+.info-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666666;
+}
+
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #d32f2f;
+    -fx-font-style: italic;
+}
+
+/* ============ CAMPOS DE ENTRADA ============ */
+.text-field, .password-field, .text-area, .combo-box, .date-picker {
+    -fx-background-color: #fcfdf8;
+    -fx-border-color: #cdac89;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #093b2d;
+}
+
+.text-field:focused, .password-field:focused, .text-area:focused,
+.combo-box:focused, .date-picker:focused {
+    -fx-border-color: #093b2d;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(9, 59, 45, 0.3), 8, 0, 0, 0);
+}
+
+.text-field.error, .password-field.error, .combo-box.error, .date-picker.error {
+    -fx-border-color: #d32f2f;
+    -fx-border-width: 2px;
+}
+
+/* ============ BOTÕES ============ */
+.button {
+    -fx-background-color: #093b2d;
+    -fx-text-fill: #fcfdf8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #0d5240;
+    -fx-effect: dropshadow(gaussian, rgba(9, 59, 45, 0.4), 10, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: #062920;
+    -fx-scale-y: 0.98;
+    -fx-scale-x: 0.98;
+}
+
+.primary-button {
+    -fx-background-color: #093b2d;
+    -fx-text-fill: #fcfdf8;
+    -fx-min-width: 120px;
+}
+
+.secondary-button {
+    -fx-background-color: #cdac89;
+    -fx-text-fill: #093b2d;
+    -fx-min-width: 120px;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #d9bd9f;
+}
+
+.cancel-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #093b2d;
+    -fx-border-width: 2px;
+    -fx-text-fill: #093b2d;
+    -fx-min-width: 120px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #f0f0f0;
+}
+
+.danger-button {
+    -fx-background-color: #d32f2f;
+    -fx-text-fill: #fcfdf8;
+}
+
+.danger-button:hover {
+    -fx-background-color: #e53935;
+}
+
+/* ============ BOTÕES DE MENU ============ */
+.menu-button {
+    -fx-background-color: #fcfdf8;
+    -fx-border-color: #cdac89;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20;
+    -fx-min-width: 200px;
+    -fx-min-height: 100px;
+}
+
+.menu-button:hover {
+    -fx-background-color: #093b2d;
+    -fx-border-color: #093b2d;
+    -fx-effect: dropshadow(gaussian, rgba(9, 59, 45, 0.3), 12, 0, 0, 3);
+}
+
+.menu-button:hover .label {
+    -fx-text-fill: #fcfdf8;
+}
+
+/* ============ TABELAS ============ */
+.table-view {
+    -fx-background-color: #fcfdf8;
+    -fx-border-color: #cdac89;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #093b2d;
+    -fx-text-fill: #fcfdf8;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #fcfdf8;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #093b2d;
+    -fx-padding: 8;
+    -fx-border-color: #e0e0e0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #fcfdf8;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #f5f5f0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #cdac89;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #093b2d;
+}
+
+/* ============ CARDS E CONTAINERS ============ */
+.card {
+    -fx-background-color: #fcfdf8;
+    -fx-border-color: #cdac89;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.form-container {
+    -fx-background-color: #fcfdf8;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.table-container {
+    -fx-padding: 20;
+}
+
+/* ============ GRÁFICOS ============ */
+.chart {
+    -fx-background-color: #fcfdf8;
+    -fx-border-color: #cdac89;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 15;
+}
+
+.chart-title {
+    -fx-text-fill: #093b2d;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.chart-legend {
+    -fx-background-color: #fcfdf8;
+    -fx-padding: 10;
+}
+
+/* ============ SCROLLBAR ============ */
+.scroll-bar {
+    -fx-background-color: #fcfdf8;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #cdac89;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #d9bd9f;
+}
+
+/* ============ SEPARADORES ============ */
+.separator {
+    -fx-background-color: #cdac89;
+}
+
+/* ============ TOOLTIP ============ */
+.tooltip {
+    -fx-background-color: #093b2d;
+    -fx-text-fill: #fcfdf8;
+    -fx-font-size: 12px;
+    -fx-padding: 5 10;
+    -fx-background-radius: 5px;
+}
+
+/* ============ ANIMAÇÕES ============ */
+.fade-in {
+    -fx-opacity: 0;
+}
+
+/* ============ RESPONSIVIDADE ============ */
+@media screen and (max-width: 1024px) {
+    .menu-button {
+        -fx-min-width: 150px;
+        -fx-min-height: 80px;
+    }
+}
+
+/* Estilo específico para tela de login */
+.login-card {
+    -fx-effect: dropshadow(gaussian, rgba(9, 59, 45, 0.2), 15, 0, 0, 5);
+}
+
+.login-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #093b2d;
+}
+
+/* Animação suave no hover do botão de login */
+.primary-button:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
