@@ -15,6 +15,9 @@ public class Main extends Application {
         return primaryStage;
     }
 
+    static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,10 +38,6 @@ public class Main extends Application {
         stage.setMinHeight(768);
         stage.setResizable(true);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
 

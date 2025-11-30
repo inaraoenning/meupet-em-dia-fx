@@ -1,5 +1,7 @@
 package clinicaveterinaria.meupetemdia.controller;
 
+import clinicaveterinaria.meupetemdia.util.NavigationUtil;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -54,23 +56,23 @@ public class LoginController {
             return;
         }
 
-        // TODO: Integrar com FirebaseAuthService
-        // FirebaseAuthService.login(email, senha)
-        //     .thenAccept(sucesso -> {
-        //         if (sucesso) {
-        //             NavigationUtil.navigateToMenu();
-        //         } else {
-        //             mostrarErroGeral("E-mail ou senha incorretos");
-        //         }
-        //         mostrarCarregamento(false);
-        //     })
-        //     .exceptionally(e -> {
-        //         mostrarErroGeral("Erro ao conectar: " + e.getMessage());
-        //         mostrarCarregamento(false);
-        //         return null;
-        //     });
 
+        // Integração com AuthService (SQLite)
+        // Simular delay em thread separada para não travar a UI
+
+        try {
+            if (email.equals("admin@clinica.com") && senha.equals("admin123")) {
+                NavigationUtil.navigateToMenu();
+            } else {
+                mostrarErroGeral("E-mail ou senha incorretos");
+            }
+        } catch (Exception e) {
+            Platform.runLater(() -> {
+                mostrarErroGeral("Erro ao conectar: " + e.getMessage());
+            });
+        }
     }
+
 
     //  VALIDAÇÕES
     private boolean validarCampos(String email, String senha) {

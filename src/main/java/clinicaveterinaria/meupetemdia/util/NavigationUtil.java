@@ -18,7 +18,7 @@ public class NavigationUtil {
      */
     public static void navigateTo(String fxmlFileName) {
         try {
-            String fxmlPath = "/clinicaveterinaria/meupetemdia/view/" + fxmlFileName;
+            String fxmlPath = "/view/" + fxmlFileName;
 
             Parent root = FXMLLoader.load(
                     NavigationUtil.class.getResource(fxmlPath)
