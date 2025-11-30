@@ -1,9 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="clinicaveterinaria.meupetemdia.controller.CadastroVacinasConsultasController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="clinicaveterinaria.meupetemdia.controller.CadastroVacinasConsultasController"
+            styleClass="root-container"
+            prefHeight="768.0"
+            prefWidth="1024.0">
+
+    <!-- ========== BARRA SUPERIOR ========== -->
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="30" bottom="15" left="30" />
+            </padding>
+
+            <Button fx:id="btnVoltar" text="← Voltar" styleClass="secondary-button"
+                    onAction="#handleVoltar">
+                <HBox.margin>
+                    <Insets right="20" />
+                </HBox.margin>
+            </Button>
+
+            <Label text="Vacinas e Consultas" styleClass="app-title">
+                <HBox.hgrow>ALWAYS</HBox.hgrow>
+            </Label>
+        </HBox>
+    </top>
+
+    <!-- ========== CONTEÚDO CENTRAL ========== -->
+    <center>
+        <VBox spacing="25">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30" />
+            </padding>
+
+            <!-- ========== FORMULÁRIO ========== -->
+            <VBox styleClass="card" spacing="15" maxWidth="800" alignment="TOP_CENTER">
+                <padding>
+                    <Insets top="25" right="30" bottom="25" left="30" />
+                </padding>
+
+                <Label text="Registrar Atendimento" styleClass="section-title" />
+
+                <!-- SELEÇÃO TIPO: CONSULTA OU VACINA -->
+                <HBox spacing="20" alignment="CENTER_LEFT">
+                    <Label text="Tipo de Atendimento:" styleClass="form-label" />
+                    <RadioButton fx:id="rbConsulta" text="Consulta" styleClass="radio-button" selected="true">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="toggleTipo" />
+                        </toggleGroup>
+                    </RadioButton>
+                    <RadioButton fx:id="rbVacina" text="Vacina" toggleGroup="$toggleTipo" styleClass="radio-button" />
+                </HBox>
+
+                <Separator />
+
+                <!-- GRID DE CAMPOS -->
+                <GridPane hgap="15" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="130" prefWidth="130" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+
+                    <!-- PET -->
+                    <Label text="Pet:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ComboBox fx:id="cmbPet" promptText="Selecione o pet"
+                                  styleClass="combo-box" maxWidth="Infinity" />
+                        <Label fx:id="lblErroPet" styleClass="error-label"
+                               visible="false" managed="false" />
+                    </VBox>
+
+                    <!-- DATA -->
+                    <Label text="Data:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <DatePicker fx:id="dtpData" promptText="Selecione a data"
+                                    styleClass="date-picker" maxWidth="Infinity" />
+                        <Label fx:id="lblErroData" styleClass="error-label"
+                               visible="false" managed="false" />
+                    </VBox>
+
+                    <!-- VETERINÁRIO -->
+                    <Label text="Veterinário:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="txtVeterinario" promptText="Nome do veterinário"
+                                   styleClass="text-field" />
+                    </VBox>
+
+                    <!-- CAMPOS ESPECÍFICOS DE CONSULTA -->
+                    <Label fx:id="lblTipoConsulta" text="Tipo de Consulta:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <VBox fx:id="vboxTipoConsulta" spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <ComboBox fx:id="cmbTipoConsulta" promptText="Selecione o tipo"
+                                  styleClass="combo-box" maxWidth="Infinity" />
+                        <Label fx:id="lblErroTipoConsulta" styleClass="error-label"
+                               visible="false" managed="false" />
+                    </VBox>
+
+                    <!-- CAMPOS ESPECÍFICOS DE VACINA -->
+                    <Label fx:id="lblVacina" text="Vacina:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="4"
+                           visible="false" managed="false" />
+                    <VBox fx:id="vboxVacina" spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                          visible="false" managed="false">
+                        <ComboBox fx:id="cmbVacina" promptText="Selecione a vacina"
+                                  styleClass="combo-box" maxWidth="Infinity" />
+                        <Label fx:id="lblErroVacina" styleClass="error-label"
+                               visible="false" managed="false" />
+                    </VBox>
+
+                    <Label fx:id="lblProximaDose" text="Próxima Dose:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="5"
+                           visible="false" managed="false" />
+                    <VBox fx:id="vboxProximaDose" spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                          visible="false" managed="false">
+                        <DatePicker fx:id="dtpProximaDose" promptText="Data da próxima dose"
+                                    styleClass="date-picker" maxWidth="Infinity" />
+                    </VBox>
+
+                    <!-- OBSERVAÇÕES -->
+                    <Label text="Observações:" styleClass="form-label"
+                           GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <TextArea fx:id="txtObservacoes" promptText="Observações sobre o atendimento"
+                              styleClass="text-area" prefRowCount="3" wrapText="true"
+                              GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                </GridPane>
+
+                <!-- BOTÕES -->
+                <HBox spacing="15" alignment="CENTER">
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+
+                    <Button fx:id="btnSalvar" text="Salvar" styleClass="primary-button"
+                            onAction="#handleSalvar" />
+                    <Button fx:id="btnLimpar" text="Limpar" styleClass="secondary-button"
+                            onAction="#handleLimpar" />
+                </HBox>
+            </VBox>
+
+            <!-- ========== TABELA ========== -->
+            <VBox spacing="12" VBox.vgrow="ALWAYS">
+
+                <!-- CABEÇALHO -->
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="Histórico de Atendimentos" styleClass="section-title" />
+
+                    <ComboBox fx:id="cmbFiltroTipo" promptText="Filtrar por tipo"
+                              styleClass="combo-box" prefWidth="150" />
+
+                    <TextField fx:id="txtBuscar" promptText="🔍 Buscar..."
+                               styleClass="text-field" prefWidth="250">
+                        <HBox.hgrow>ALWAYS</HBox.hgrow>
+                    </TextField>
+                </HBox>
+
+                <!-- TABELA -->
+                <TableView fx:id="tblRegistros" styleClass="table-view" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="colTipo" text="Tipo" prefWidth="80" />
+                        <TableColumn fx:id="colPet" text="Pet" prefWidth="130" />
+                        <TableColumn fx:id="colData" text="Data" prefWidth="100" />
+                        <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="180" />
+                        <TableColumn fx:id="colVeterinario" text="Veterinário" prefWidth="130" />
+                        <TableColumn fx:id="colProximaDose" text="Próxima Dose" prefWidth="110" />
+                        <TableColumn fx:id="colObservacoes" text="Observações" prefWidth="200" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+
+                <!-- BOTÕES DA TABELA -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Button fx:id="btnExcluir" text="Excluir Selecionado" styleClass="danger-button"
+                            onAction="#handleExcluir" disable="true" />
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

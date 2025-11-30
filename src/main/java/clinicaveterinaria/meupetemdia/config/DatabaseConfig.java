@@ -56,4 +56,7 @@ public class DatabaseConfig {
             System.out.println("Erro ao criar tabelas: " + e.getMessage());
         }
     }
+
+    public static void close() {
+    }
 }

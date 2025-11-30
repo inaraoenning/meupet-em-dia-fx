@@ -4,6 +4,7 @@ module clinicaveterinaria.meupetemdia {
     requires java.sql;
 
     opens clinicaveterinaria.meupetemdia.controller to javafx.fxml;
+    opens clinicaveterinaria.meupetemdia.model to javafx.base;
 
     exports clinicaveterinaria.meupetemdia;
 
