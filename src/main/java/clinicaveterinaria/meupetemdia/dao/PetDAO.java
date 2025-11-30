@@ -22,7 +22,7 @@ public class PetDAO {
         String sql = "INSERT INTO pets (nome, especie, raca, data_nascimento, dono_id) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, pet.getNome());
@@ -58,7 +58,7 @@ public class PetDAO {
         String sql = "UPDATE pets SET nome = ?, especie = ?, raca = ?, " +
                 "data_nascimento = ?, dono_id = ? WHERE id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, pet.getNome());
@@ -87,7 +87,7 @@ public class PetDAO {
     public boolean delete(int id) {
         String sql = "DELETE FROM pets WHERE id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -110,7 +110,7 @@ public class PetDAO {
         String sql = "SELECT p.*, d.nome as dono_nome FROM pets p " +
                 "INNER JOIN donos d ON p.dono_id = d.id WHERE p.id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -137,7 +137,7 @@ public class PetDAO {
         String sql = "SELECT p.*, d.nome as dono_nome FROM pets p " +
                 "INNER JOIN donos d ON p.dono_id = d.id ORDER BY p.nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -164,7 +164,7 @@ public class PetDAO {
                 "INNER JOIN donos d ON p.dono_id = d.id " +
                 "WHERE p.nome LIKE ? ORDER BY p.nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + nome + "%");
@@ -193,7 +193,7 @@ public class PetDAO {
                 "INNER JOIN donos d ON p.dono_id = d.id " +
                 "WHERE p.dono_id = ? ORDER BY p.nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, donoId);
@@ -222,7 +222,7 @@ public class PetDAO {
                 "INNER JOIN donos d ON p.dono_id = d.id " +
                 "WHERE p.especie = ? ORDER BY p.nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, especie);
