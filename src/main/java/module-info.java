@@ -1,6 +1,7 @@
 module clinicaveterinaria.meupetemdia {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
     // Abre pacotes para reflexão (FXML loader)
     opens clinicaveterinaria.meupetemdia.controller to javafx.fxml;
