@@ -23,20 +23,37 @@ public class DatabaseConfig {
 
     // Criação das tabelas
     public static void initialize() {
-        String sql = "CREATE TABLE IF NOT EXISTS users (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT NOT NULL," +
-                "email TEXT UNIQUE" +
-                ");";
+
+        String tableDonos = """
+            CREATE TABLE IF NOT EXISTS donos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                telefone TEXT
+            );
+        """;
+
+        String tablePets = """
+            CREATE TABLE IF NOT EXISTS pets (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                especie TEXT,
+                raca TEXT,
+                data_nascimento DATE,
+                dono_id INTEGER,
+                FOREIGN KEY (dono_id) REFERENCES donos(id)
+            );
+        """;
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
 
-            stmt.execute(sql);
-            System.out.println("Tabela criada/verificada.");
+            stmt.execute(tableDonos);
+            stmt.execute(tablePets);
+
+            System.out.println("Tabelas criadas/verificadas com sucesso!");
 
         } catch (SQLException e) {
-            System.out.println("Erro ao criar tabela: " + e.getMessage());
+            System.out.println("Erro ao criar tabelas: " + e.getMessage());
         }
     }
 }
