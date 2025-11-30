@@ -20,7 +20,7 @@ public class DonoDAO {
     public int insert(Dono dono) {
         String sql = "INSERT INTO donos (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, dono.getNome());
@@ -54,7 +54,7 @@ public class DonoDAO {
         String sql = "UPDATE donos SET nome = ?, telefone = ?, email = ?, endereco = ?, " +
                 "data_atualizacao = CURRENT_TIMESTAMP WHERE id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, dono.getNome());
@@ -81,7 +81,7 @@ public class DonoDAO {
     public boolean delete(int id) {
         String sql = "DELETE FROM donos WHERE id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -103,7 +103,7 @@ public class DonoDAO {
     public Dono findById(int id) {
         String sql = "SELECT * FROM donos WHERE id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -129,7 +129,7 @@ public class DonoDAO {
         List<Dono> donos = new ArrayList<>();
         String sql = "SELECT * FROM donos ORDER BY nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -154,7 +154,7 @@ public class DonoDAO {
         List<Dono> donos = new ArrayList<>();
         String sql = "SELECT * FROM donos WHERE nome LIKE ? ORDER BY nome";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + nome + "%");
@@ -180,7 +180,7 @@ public class DonoDAO {
     public Dono findByEmail(String email) {
         String sql = "SELECT * FROM donos WHERE email = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, email);
@@ -217,7 +217,7 @@ public class DonoDAO {
     public boolean emailExiste(String email, int excludeId) {
         String sql = "SELECT COUNT(*) FROM donos WHERE email = ? AND id != ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseConfig.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, email);
