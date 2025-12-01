@@ -44,6 +44,7 @@
 - ✅ Validações em tempo real
 - ✅ Máscaras de entrada (telefone)
 - ✅ Busca e filtros
+- ✅ Envio de notificação (WhatsApp)
 
 ### CRUD:
 - ✅ Donos (criar, editar, excluir, listar)
