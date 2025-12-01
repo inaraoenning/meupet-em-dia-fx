@@ -84,7 +84,7 @@ public class CadastroVacinasConsultasController {
     @FXML
     private void initialize() {
         petDAO = new PetDAO();
-        vacinaDAO = new VacinaDAO();
+//        vacinaDAO = new VacinaDAO();
         consultaDAO = new ConsultaDAO();
         registroVacinaDAO = new RegistroVacinaDAO();
 

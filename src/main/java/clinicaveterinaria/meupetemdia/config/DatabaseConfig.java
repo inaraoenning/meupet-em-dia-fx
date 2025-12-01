@@ -13,6 +13,7 @@ public class DatabaseConfig {
     public static Connection connect() {
         Connection conn = null;
         try {
+            System.out.println("Banco real: " + new java.io.File("mydatabase.db").getAbsolutePath());
             conn = DriverManager.getConnection(URL);
             System.out.println("Conectado ao SQLite!");
         } catch (SQLException e) {
@@ -28,11 +29,25 @@ public class DatabaseConfig {
             CREATE TABLE IF NOT EXISTS donos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
-                telefone TEXT
+                telefone TEXT,
+                email TEXT,
+                endereco TEXT
             );
         """;
 
         String tablePets = """
+            CREATE TABLE IF NOT EXISTS pets (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                especie TEXT,
+                raca TEXT,
+                data_nascimento DATE,
+                dono_id INTEGER,
+                FOREIGN KEY (dono_id) REFERENCES donos(id)
+            );
+        """;
+
+        String tableVacinas = """
             CREATE TABLE IF NOT EXISTS pets (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,

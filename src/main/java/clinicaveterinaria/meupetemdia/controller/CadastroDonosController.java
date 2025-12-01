@@ -7,13 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import clinicaveterinaria.meupetemdia.model.Dono;
+import clinicaveterinaria.meupetemdia.dao.DonoDAO;
 import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 
 import java.util.Optional;
 
 /**
  * Controller da tela de Cadastro de Donos
- * Responsável pelo CRUD de proprietários de pets
  */
 public class CadastroDonosController {
 
@@ -47,8 +47,11 @@ public class CadastroDonosController {
     // ========== DADOS ==========
     private ObservableList<Dono> listaDonos;
     private FilteredList<Dono> donosFiltrados;
+
     private Dono donoEmEdicao;
     private boolean modoEdicao = false;
+
+    private final DonoDAO donoDAO = new DonoDAO();
 
     // ========== INICIALIZAÇÃO ==========
     @FXML
@@ -70,7 +73,6 @@ public class CadastroDonosController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
-        // Listener para seleção na tabela
         tblDonos.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             boolean itemSelecionado = newVal != null;
             btnEditar.setDisable(!itemSelecionado);
@@ -91,79 +93,61 @@ public class CadastroDonosController {
                     String busca = newVal.toLowerCase();
                     return dono.getNome().toLowerCase().contains(busca) ||
                             dono.getTelefone().contains(busca) ||
-                            dono.getEmail().toLowerCase().contains(busca);
+                            dono.getEmail().toLowerCase().contains(busca) ||
+                            dono.getEndereco().toLowerCase().contains(busca);
                 });
             }
         });
     }
 
     /**
-     * Configura máscaras nos campos
+     * Máscaras para telefone
      */
     private void configurarMascaras() {
-        // Máscara de telefone: (00) 00000-0000
         txtTelefone.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null && !newVal.isEmpty()) {
-                String numeros = newVal.replaceAll("[^0-9]", "");
-                if (numeros.length() > 11) {
-                    numeros = numeros.substring(0, 11);
-                }
+            if (newVal == null) return;
 
-                StringBuilder formatado = new StringBuilder();
-                if (numeros.length() > 0) {
-                    formatado.append("(");
-                    formatado.append(numeros.substring(0, Math.min(2, numeros.length())));
-                }
-                if (numeros.length() >= 3) {
-                    formatado.append(") ");
-                    formatado.append(numeros.substring(2, Math.min(7, numeros.length())));
-                }
-                if (numeros.length() >= 8) {
-                    formatado.append("-");
-                    formatado.append(numeros.substring(7));
-                }
+            String numeros = newVal.replaceAll("[^0-9]", "");
+            if (numeros.length() > 11) numeros = numeros.substring(0, 11);
 
-                if (!newVal.equals(formatado.toString())) {
-                    txtTelefone.setText(formatado.toString());
-                }
+            StringBuilder f = new StringBuilder();
+
+            if (numeros.length() > 0) {
+                f.append("(").append(numeros.substring(0, Math.min(2, numeros.length())));
+            }
+            if (numeros.length() >= 3) {
+                f.append(") ").append(numeros.substring(2, Math.min(7, numeros.length())));
+            }
+            if (numeros.length() >= 8) {
+                f.append("-").append(numeros.substring(7));
+            }
+
+            if (!newVal.equals(f.toString())) {
+                txtTelefone.setText(f.toString());
             }
         });
     }
 
     /**
-     * Configura listeners para limpar erros ao digitar
+     * Limpa erros ao digitar
      */
     private void configurarListeners() {
-        txtNome.textProperty().addListener((obs, oldVal, newVal) ->
-                limparErro(txtNome, lblErroNome));
-        txtTelefone.textProperty().addListener((obs, oldVal, newVal) ->
-                limparErro(txtTelefone, lblErroTelefone));
-        txtEmail.textProperty().addListener((obs, oldVal, newVal) ->
-                limparErro(txtEmail, lblErroEmail));
-        txtEndereco.textProperty().addListener((obs, oldVal, newVal) ->
-                limparErro(txtEndereco, lblErroEndereco));
+        txtNome.textProperty().addListener((obs, o, n) -> limparErro(txtNome, lblErroNome));
+        txtTelefone.textProperty().addListener((obs, o, n) -> limparErro(txtTelefone, lblErroTelefone));
+        txtEmail.textProperty().addListener((obs, o, n) -> limparErro(txtEmail, lblErroEmail));
+        txtEndereco.textProperty().addListener((obs, o, n) -> limparErro(txtEndereco, lblErroEndereco));
     }
 
     /**
-     * Carrega donos do banco de dados
+     * CARREGA DADOS DO BANCO
      */
     private void carregarDonos() {
-        // TODO: Integrar com DonoDAO
-        // listaDonos = FXCollections.observableArrayList(DonoDAO.findAll());
-
-        // DADOS SIMULADOS
-        listaDonos = FXCollections.observableArrayList(
-                new Dono(1, "João Silva", "(11) 98765-4321", "joao@email.com", "Rua A, 123"),
-                new Dono(2, "Maria Santos", "(11) 91234-5678", "maria@email.com", "Av. B, 456"),
-                new Dono(3, "Pedro Oliveira", "(11) 99999-8888", "pedro@email.com", "Rua C, 789")
-        );
-
+        listaDonos = FXCollections.observableArrayList(donoDAO.findAll());
         donosFiltrados = new FilteredList<>(listaDonos, p -> true);
         tblDonos.setItems(donosFiltrados);
     }
 
-    // ========== AÇÕES DOS BOTÕES ==========
-
+    // ========== AÇÕES ==========
     @FXML
     private void handleVoltar() {
         NavigationUtil.navigateToMenu();
@@ -172,22 +156,19 @@ public class CadastroDonosController {
     @FXML
     private void handleSalvar() {
         limparTodosErros();
-
-        if (!validarCampos()) {
-            return;
-        }
+        if (!validarCampos()) return;
 
         try {
             if (modoEdicao) {
-                atualizarDono();
+                atualizarDonoBanco();
             } else {
-                inserirDono();
+                inserirDonoBanco();
             }
 
             carregarDonos();
             limparFormulario();
-            mostrarSucesso(modoEdicao ? "Dono atualizado com sucesso!" : "Dono cadastrado com sucesso!");
 
+            mostrarSucesso(modoEdicao ? "Dono atualizado com sucesso!" : "Dono cadastrado com sucesso!");
         } catch (Exception e) {
             mostrarErro("Erro ao salvar: " + e.getMessage());
         }
@@ -206,112 +187,62 @@ public class CadastroDonosController {
 
     @FXML
     private void handleEditar() {
-        Dono donoSelecionado = tblDonos.getSelectionModel().getSelectedItem();
-        if (donoSelecionado != null) {
-            preencherFormulario(donoSelecionado);
-            ativarModoEdicao();
-        }
+        Dono d = tblDonos.getSelectionModel().getSelectedItem();
+        if (d == null) return;
+
+        donoEmEdicao = d;
+        preencherFormulario(d);
+        ativarModoEdicao();
     }
 
     @FXML
     private void handleExcluir() {
-        Dono donoSelecionado = tblDonos.getSelectionModel().getSelectedItem();
-        if (donoSelecionado == null) {
-            return;
-        }
+        Dono d = tblDonos.getSelectionModel().getSelectedItem();
+        if (d == null) return;
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar Exclusão");
-        alert.setHeaderText("Deseja realmente excluir este dono?");
-        alert.setContentText("Nome: " + donoSelecionado.getNome() + "\n" +
-                "Esta ação não poderá ser desfeita.");
+        alert.setTitle("Excluir Dono");
+        alert.setHeaderText("Deseja realmente excluir?");
+        alert.setContentText("Nome: " + d.getNome());
 
-        Optional<ButtonType> resultado = alert.showAndWait();
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            excluirDono(donoSelecionado);
+        Optional<ButtonType> r = alert.showAndWait();
+        if (r.isPresent() && r.get() == ButtonType.OK) {
+            donoDAO.delete(d.getId());
+            listaDonos.remove(d);
+            mostrarSucesso("Dono excluído!");
         }
     }
 
-    // ========== MÉTODOS AUXILIARES ==========
+    // ========== CRUD REAL NO BANCO ==========
 
-    private boolean validarCampos() {
-        boolean valido = true;
+    private void inserirDonoBanco() {
+        Dono novo = new Dono();
+        novo.setNome(txtNome.getText().trim());
+        novo.setTelefone(txtTelefone.getText().trim());
+        novo.setEmail(txtEmail.getText().trim());
+        novo.setEndereco(txtEndereco.getText().trim());
 
-        // Validar nome
-        String nome = txtNome.getText().trim();
-        if (nome.isEmpty()) {
-            mostrarErro(txtNome, lblErroNome, "O nome é obrigatório");
-            valido = false;
-        } else if (nome.length() < 3) {
-            mostrarErro(txtNome, lblErroNome, "O nome deve ter pelo menos 3 caracteres");
-            valido = false;
-        }
-
-        // Validar telefone
-        String telefone = txtTelefone.getText().trim();
-        if (telefone.isEmpty()) {
-            mostrarErro(txtTelefone, lblErroTelefone, "O telefone é obrigatório");
-            valido = false;
-        } else if (!telefone.matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) {
-            mostrarErro(txtTelefone, lblErroTelefone, "Telefone inválido");
-            valido = false;
-        }
-
-        // Validar e-mail
-        String email = txtEmail.getText().trim();
-        if (email.isEmpty()) {
-            mostrarErro(txtEmail, lblErroEmail, "O e-mail é obrigatório");
-            valido = false;
-        } else if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
-            mostrarErro(txtEmail, lblErroEmail, "E-mail inválido");
-            valido = false;
-        }
-
-        // Validar endereço
-        String endereco = txtEndereco.getText().trim();
-        if (endereco.isEmpty()) {
-            mostrarErro(txtEndereco, lblErroEndereco, "O endereço é obrigatório");
-            valido = false;
-        }
-
-        return valido;
+        int id = donoDAO.insert(novo);
+        novo.setId(id);
+        listaDonos.add(novo);
     }
 
-    private void inserirDono() {
-        Dono novoDono = new Dono(
-                listaDonos.size() + 1, // Simular ID auto-incremento
-                txtNome.getText().trim(),
-                txtTelefone.getText().trim(),
-                txtEmail.getText().trim(),
-                txtEndereco.getText().trim()
-        );
-
-        // TODO: DonoDAO.insert(novoDono);
-        listaDonos.add(novoDono);
-    }
-
-    private void atualizarDono() {
+    private void atualizarDonoBanco() {
         donoEmEdicao.setNome(txtNome.getText().trim());
         donoEmEdicao.setTelefone(txtTelefone.getText().trim());
         donoEmEdicao.setEmail(txtEmail.getText().trim());
         donoEmEdicao.setEndereco(txtEndereco.getText().trim());
 
-        // TODO: DonoDAO.update(donoEmEdicao);
-        tblDonos.refresh();
+        donoDAO.update(donoEmEdicao);
     }
 
-    private void excluirDono(Dono dono) {
-        // TODO: DonoDAO.delete(dono.getId());
-        listaDonos.remove(dono);
-        mostrarSucesso("Dono excluído com sucesso!");
-    }
+    // ========== AUXILIARES ==========
 
-    private void preencherFormulario(Dono dono) {
-        donoEmEdicao = dono;
-        txtNome.setText(dono.getNome());
-        txtTelefone.setText(dono.getTelefone());
-        txtEmail.setText(dono.getEmail());
-        txtEndereco.setText(dono.getEndereco());
+    private void preencherFormulario(Dono d) {
+        txtNome.setText(d.getNome());
+        txtTelefone.setText(d.getTelefone());
+        txtEmail.setText(d.getEmail());
+        txtEndereco.setText(d.getEndereco());
     }
 
     private void limparFormulario() {
@@ -340,19 +271,43 @@ public class CadastroDonosController {
         btnCancelar.setManaged(false);
     }
 
-    private void mostrarErro(Control campo, Label labelErro, String mensagem) {
-        if (!campo.getStyleClass().contains("error")) {
-            campo.getStyleClass().add("error");
+    private boolean validarCampos() {
+        boolean valido = true;
+
+        if (txtNome.getText().trim().isEmpty()) {
+            mostrarErro(txtNome, lblErroNome, "Nome obrigatório");
+            valido = false;
         }
-        labelErro.setText(mensagem);
-        labelErro.setVisible(true);
-        labelErro.setManaged(true);
+
+        if (txtTelefone.getText().trim().isEmpty()) {
+            mostrarErro(txtTelefone, lblErroTelefone, "Telefone obrigatório");
+            valido = false;
+        }
+
+        if (txtEmail.getText().trim().isEmpty()) {
+            mostrarErro(txtEmail, lblErroEmail, "E-mail obrigatório");
+            valido = false;
+        }
+
+        if (txtEndereco.getText().trim().isEmpty()) {
+            mostrarErro(txtEndereco, lblErroEndereco, "Endereço obrigatório");
+            valido = false;
+        }
+
+        return valido;
     }
 
-    private void limparErro(Control campo, Label labelErro) {
+    private void mostrarErro(Control campo, Label label, String msg) {
+        campo.getStyleClass().add("error");
+        label.setText(msg);
+        label.setVisible(true);
+        label.setManaged(true);
+    }
+
+    private void limparErro(Control campo, Label label) {
         campo.getStyleClass().remove("error");
-        labelErro.setVisible(false);
-        labelErro.setManaged(false);
+        label.setVisible(false);
+        label.setManaged(false);
     }
 
     private void limparTodosErros() {
@@ -362,19 +317,19 @@ public class CadastroDonosController {
         limparErro(txtEndereco, lblErroEndereco);
     }
 
-    private void mostrarSucesso(String mensagem) {
+    private void mostrarSucesso(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sucesso");
         alert.setHeaderText(null);
-        alert.setContentText(mensagem);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 
-    private void mostrarErro(String mensagem) {
+    private void mostrarErro(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erro");
         alert.setHeaderText("Ocorreu um erro");
-        alert.setContentText(mensagem);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 }
