@@ -78,13 +78,26 @@ public class VacinaDAO {
     public void criarVacinasPadrao() {
         List<Vacina> vacinas = findAll();
         if (vacinas.isEmpty()) {
+
+            // Vacinas para cães
             insert(new Vacina("V8 (Cães)", "Vacina óctupla para cães", 365));
             insert(new Vacina("V10 (Cães)", "Vacina déctupla para cães", 365));
-            insert(new Vacina("Antirrábica", "Vacina contra raiva", 365));
-            insert(new Vacina("V4 (Gatos)", "Vacina quádrupla para gatos", 365));
-            insert(new Vacina("V5 (Gatos)", "Vacina quíntupla para gatos", 365));
-            insert(new Vacina("Giárdia", "Vacina contra giárdia", 365));
-            insert(new Vacina("Gripe Canina)", "Vacina contra tosse dos canis", 180));
+            insert(new Vacina("Antirrábica (Cães)", "Proteção contra raiva", 365));
+            insert(new Vacina("Giárdia (Cães)", "Contra giardíase", 365));
+            insert(new Vacina("Gripe Canina", "Tosse dos canis", 180));
+            insert(new Vacina("Leishmaniose", "Prevenção da leishmaniose (Leish-Tec)", 365));
+            insert(new Vacina("Lyme", "Proteção contra Borrelia burgdorferi", 365));
+            insert(new Vacina("Coronavírus Canino", "Proteção contra coronavírus canino", 365));
+            insert(new Vacina("Parainfluenza", "Proteção contra Parainfluenza tipo 3", 365));
+            insert(new Vacina("Hepatite Infecciosa", "Proteção contra hepatite canina", 365));
+
+            // Vacinas para gatos
+            insert(new Vacina("V3 (Gatos)", "Rinotraqueíte, calicivirose e panleucopenia", 365));
+            insert(new Vacina("V4 (Gatos)", "V3 + clamidiose", 365));
+            insert(new Vacina("V5 (Gatos)", "V4 + FeLV", 365));
+            insert(new Vacina("FeLV (Gatos)", "Proteção contra leucemia felina", 365));
+            insert(new Vacina("Antirrábica (Gatos)", "Proteção contra raiva", 365));
+            insert(new Vacina("FIV (Gatos)", "Contra imunodeficiência felina", 365));
             System.out.println("✅ Vacinas padrão criadas");
         }
     }
