@@ -14,12 +14,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
 
-/**
- * Controller da tela de Relatórios e Estatísticas
- */
+
+//Controller da tela de Relatórios e Estatísticas
 public class RelatoriosController {
 
-    // ========== COMPONENTES ==========
+    // COMPONENTES
     @FXML
     private Label lblTotalPets;
     @FXML
@@ -34,13 +33,13 @@ public class RelatoriosController {
     @FXML
     private BarChart<String, Number> chartConsultas;
 
-    // ========== DAOs ==========
+    // DAOs
     private DonoDAO donoDAO;
     private PetDAO petDAO;
     private ConsultaDAO consultaDAO;
     private RegistroVacinaDAO registroVacinaDAO;
 
-    // ========== INICIALIZAÇÃO ==========
+    // INICIALIZAÇÃO
     @FXML
     private void initialize() {
         donoDAO = new DonoDAO();
@@ -51,9 +50,8 @@ public class RelatoriosController {
         carregarDados();
     }
 
-    /**
-     * Carrega todos os dados e atualiza gráficos
-     */
+
+    // Carrega todos os dados e atualiza gráficos
     private void carregarDados() {
         try {
             carregarEstatisticasGerais();
@@ -65,9 +63,8 @@ public class RelatoriosController {
         }
     }
 
-    /**
-     * Carrega estatísticas gerais (cards)
-     */
+
+    // Carrega estatísticas gerais (cards)
     private void carregarEstatisticasGerais() {
         try {
             int totalPets = petDAO.findAll().size();
@@ -86,9 +83,8 @@ public class RelatoriosController {
         }
     }
 
-    /**
-     * Carrega gráfico de pizza - Status das vacinas
-     */
+
+    // Carrega gráfico de pizza - Status das vacinas
     private void carregarGraficoVacinas() {
         try {
             List<RegistroVacina> registros = registroVacinaDAO.findAll();
@@ -160,9 +156,8 @@ public class RelatoriosController {
         }
     }
 
-    /**
-     * Aplica cores personalizadas ao gráfico de pizza
-     */
+
+    // Aplica cores personalizadas ao gráfico de pizza
     private void aplicarCoresGraficoPizza() {
         // Aguardar renderização
         chartVacinas.applyCss();
@@ -186,9 +181,8 @@ public class RelatoriosController {
         }
     }
 
-    /**
-     * Carrega gráfico de barras - Consultas por mês
-     */
+
+    // Carrega gráfico de barras - Consultas por mês
     private void carregarGraficoConsultas() {
         try {
             List<Consulta> consultas = consultaDAO.findAll();
@@ -234,7 +228,7 @@ public class RelatoriosController {
         }
     }
 
-    // ========== AÇÕES ==========
+    // AÇÕES
 
     @FXML
     private void handleVoltar() {
