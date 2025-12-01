@@ -136,6 +136,14 @@ public class RegistroVacinaDAO {
         registro.setId(rs.getInt("id"));
         registro.setPetId(rs.getInt("pet_id"));
         registro.setPetNome(rs.getString("pet_nome"));
+
+        // Adicionar nome do dono se disponível
+        try {
+            registro.setDonoNome(rs.getString("dono_nome"));
+        } catch (SQLException e) {
+            // Se não houver a coluna, ignora
+        }
+
         registro.setVacinaId(rs.getInt("vacina_id"));
         registro.setVacinaNome(rs.getString("vacina_nome"));
         registro.setDataAplicacao(rs.getDate("data_aplicacao").toLocalDate());

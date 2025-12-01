@@ -73,9 +73,8 @@ public class VacinaDAO {
         return null;
     }
 
-    /**
-     * Cria vacinas padrão se não existirem
-     */
+
+    //Cria vacinas padrão
     public void criarVacinasPadrao() {
         List<Vacina> vacinas = findAll();
         if (vacinas.isEmpty()) {

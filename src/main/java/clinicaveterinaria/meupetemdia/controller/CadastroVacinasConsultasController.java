@@ -1,5 +1,14 @@
 package clinicaveterinaria.meupetemdia.controller;
 
+import clinicaveterinaria.meupetemdia.dao.ConsultaDAO;
+import clinicaveterinaria.meupetemdia.dao.PetDAO;
+import clinicaveterinaria.meupetemdia.dao.RegistroVacinaDAO;
+import clinicaveterinaria.meupetemdia.dao.VacinaDAO;
+import clinicaveterinaria.meupetemdia.model.Consulta;
+import clinicaveterinaria.meupetemdia.model.Pet;
+import clinicaveterinaria.meupetemdia.model.RegistroVacina;
+import clinicaveterinaria.meupetemdia.model.Vacina;
+import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,13 +17,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
-import clinicaveterinaria.meupetemdia.model.*;
-import clinicaveterinaria.meupetemdia.dao.*;
-import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,48 +29,82 @@ import java.util.Optional;
 public class CadastroVacinasConsultasController {
 
     // ========== COMPONENTES DO FORMULÁRIO ==========
-    @FXML private RadioButton rbConsulta;
-    @FXML private RadioButton rbVacina;
-    @FXML private ToggleGroup toggleTipo;
+    @FXML
+    private RadioButton rbConsulta;
+    @FXML
+    private RadioButton rbVacina;
+    @FXML
+    private ToggleGroup toggleTipo;
 
-    @FXML private ComboBox<Pet> cmbPet;
-    @FXML private DatePicker dtpData;
-    @FXML private TextField txtVeterinario;
-    @FXML private ComboBox<String> cmbTipoConsulta;
-    @FXML private ComboBox<Vacina> cmbVacina;
-    @FXML private DatePicker dtpProximaDose;
-    @FXML private TextArea txtObservacoes;
+    @FXML
+    private ComboBox<Pet> cmbPet;
+    @FXML
+    private DatePicker dtpData;
+    @FXML
+    private TextField txtVeterinario;
+    @FXML
+    private ComboBox<String> cmbTipoConsulta;
+    @FXML
+    private ComboBox<Vacina> cmbVacina;
+    @FXML
+    private DatePicker dtpProximaDose;
+    @FXML
+    private TextArea txtObservacoes;
 
-    @FXML private Label lblErroPet;
-    @FXML private Label lblErroData;
-    @FXML private Label lblErroTipoConsulta;
-    @FXML private Label lblErroVacina;
+    @FXML
+    private Label lblErroPet;
+    @FXML
+    private Label lblErroData;
+    @FXML
+    private Label lblErroTipoConsulta;
+    @FXML
+    private Label lblErroVacina;
 
     // Labels e containers específicos
-    @FXML private Label lblTipoConsulta;
-    @FXML private VBox vboxTipoConsulta;
-    @FXML private Label lblVacina;
-    @FXML private VBox vboxVacina;
-    @FXML private Label lblProximaDose;
-    @FXML private VBox vboxProximaDose;
+    @FXML
+    private Label lblTipoConsulta;
+    @FXML
+    private VBox vboxTipoConsulta;
+    @FXML
+    private Label lblVacina;
+    @FXML
+    private VBox vboxVacina;
+    @FXML
+    private Label lblProximaDose;
+    @FXML
+    private VBox vboxProximaDose;
 
-    @FXML private Button btnSalvar;
-    @FXML private Button btnLimpar;
+    @FXML
+    private Button btnSalvar;
+    @FXML
+    private Button btnLimpar;
 
     // ========== COMPONENTES DA TABELA ==========
-    @FXML private ComboBox<String> cmbFiltroTipo;
-    @FXML private TextField txtBuscar;
-    @FXML private TableView<RegistroAtendimento> tblRegistros;
-    @FXML private TableColumn<RegistroAtendimento, Integer> colId;
-    @FXML private TableColumn<RegistroAtendimento, String> colTipo;
-    @FXML private TableColumn<RegistroAtendimento, String> colPet;
-    @FXML private TableColumn<RegistroAtendimento, String> colData;
-    @FXML private TableColumn<RegistroAtendimento, String> colDescricao;
-    @FXML private TableColumn<RegistroAtendimento, String> colVeterinario;
-    @FXML private TableColumn<RegistroAtendimento, String> colProximaDose;
-    @FXML private TableColumn<RegistroAtendimento, String> colObservacoes;
+    @FXML
+    private ComboBox<String> cmbFiltroTipo;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private TableView<RegistroAtendimento> tblRegistros;
+    @FXML
+    private TableColumn<RegistroAtendimento, Integer> colId;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colTipo;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colPet;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colData;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colDescricao;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colVeterinario;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colProximaDose;
+    @FXML
+    private TableColumn<RegistroAtendimento, String> colObservacoes;
 
-    @FXML private Button btnExcluir;
+    @FXML
+    private Button btnExcluir;
 
     // ========== DADOS ==========
     private ObservableList<Pet> listaPets;
@@ -84,7 +123,7 @@ public class CadastroVacinasConsultasController {
     @FXML
     private void initialize() {
         petDAO = new PetDAO();
-//        vacinaDAO = new VacinaDAO();
+        vacinaDAO = new VacinaDAO();
         consultaDAO = new ConsultaDAO();
         registroVacinaDAO = new RegistroVacinaDAO();
 
@@ -559,12 +598,32 @@ public class CadastroVacinasConsultasController {
         }
 
         // Getters
-        public int getId() { return id; }
-        public String getTipo() { return tipo; }
-        public String getPetNome() { return petNome; }
-        public LocalDate getData() { return data; }
-        public String getDescricao() { return descricao; }
-        public String getVeterinario() { return veterinario != null ? veterinario : ""; }
-        public String getObservacoes() { return observacoes != null ? observacoes : ""; }
+        public int getId() {
+            return id;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public String getPetNome() {
+            return petNome;
+        }
+
+        public LocalDate getData() {
+            return data;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public String getVeterinario() {
+            return veterinario != null ? veterinario : "";
+        }
+
+        public String getObservacoes() {
+            return observacoes != null ? observacoes : "";
+        }
     }
 }

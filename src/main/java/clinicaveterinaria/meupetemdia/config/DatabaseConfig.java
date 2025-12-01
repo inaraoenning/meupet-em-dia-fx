@@ -26,44 +26,71 @@ public class DatabaseConfig {
     public static void initialize() {
 
         String tableDonos = """
-            CREATE TABLE IF NOT EXISTS donos (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL,
-                telefone TEXT,
-                email TEXT,
-                endereco TEXT
-            );
-        """;
+                    CREATE TABLE IF NOT EXISTS donos (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        telefone TEXT,
+                        email TEXT,
+                        endereco TEXT
+                    );
+                """;
 
         String tablePets = """
-            CREATE TABLE IF NOT EXISTS pets (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL,
-                especie TEXT,
-                raca TEXT,
-                data_nascimento DATE,
-                dono_id INTEGER,
-                FOREIGN KEY (dono_id) REFERENCES donos(id)
-            );
-        """;
+                    CREATE TABLE IF NOT EXISTS pets (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        especie TEXT,
+                        raca TEXT,
+                        data_nascimento DATE,
+                        dono_id INTEGER,
+                        FOREIGN KEY (dono_id) REFERENCES donos(id)
+                    );
+                """;
 
         String tableVacinas = """
-            CREATE TABLE IF NOT EXISTS pets (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL,
-                especie TEXT,
-                raca TEXT,
-                data_nascimento DATE,
-                dono_id INTEGER,
-                FOREIGN KEY (dono_id) REFERENCES donos(id)
-            );
-        """;
+                   CREATE TABLE IF NOT EXISTS registros_vacinas (
+                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                     pet_id INTEGER NOT NULL,
+                                     vacina_id INTEGER NOT NULL,
+                                     data_aplicacao DATE NOT NULL,
+                                     data_proxima_dose DATE,
+                                     veterinario TEXT,
+                                     observacoes TEXT,
+                                     FOREIGN KEY (pet_id) REFERENCES pets(id),
+                                     FOREIGN KEY (vacina_id) REFERENCES vacinas(id)
+                                 );                                 
+                """;
+
+
+        String registro = """
+                    CREATE TABLE IF NOT EXISTS vacinas (
+                                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                   nome TEXT NOT NULL,
+                                   descricao TEXT,
+                                   intervalo_dias_reforco INTEGER
+                               );
+                """;
+
+        String consultas = """
+                    CREATE TABLE IF NOT EXISTS consultas (
+                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                     pet_id INTEGER NOT NULL,
+                                     data_consulta DATE NOT NULL,
+                                     tipo TEXT NOT NULL,
+                                     veterinario TEXT,
+                                     observacoes TEXT,
+                                     FOREIGN KEY (pet_id) REFERENCES pets(id)
+                                 );                                                 
+                """;
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(tableDonos);
             stmt.execute(tablePets);
+            stmt.execute(tableVacinas);
+            stmt.execute(registro);
+            stmt.execute(consultas);
 
             System.out.println("Tabelas criadas/verificadas com sucesso!");
 
