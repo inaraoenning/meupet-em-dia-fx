@@ -1,9 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="clinicaveterinaria.meupetemdia.controller.RelatoriosController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="clinicaveterinaria.meupetemdia.controller.RelatoriosController"
+            styleClass="root-container"
+            prefHeight="768.0"
+            prefWidth="1024.0">
+
+    <!-- ========== BARRA SUPERIOR ========== -->
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="30" bottom="15" left="30" />
+            </padding>
+
+            <Button fx:id="btnVoltar" text="← Voltar" styleClass="secondary-button"
+                    onAction="#handleVoltar">
+                <HBox.margin>
+                    <Insets right="20" />
+                </HBox.margin>
+            </Button>
+
+            <Label fx:id="lblTitulo" text="📊 Relatórios e Estatísticas" styleClass="app-title">
+                <HBox.hgrow>ALWAYS</HBox.hgrow>
+            </Label>
+
+            <Button fx:id="btnAtualizar" text="🔄 Atualizar" styleClass="secondary-button"
+                    onAction="#handleAtualizar" />
+        </HBox>
+    </top>
+
+    <!-- ========== CONTEÚDO CENTRAL ========== -->
+    <center>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" styleClass="root-container">
+            <VBox fx:id="vboxPrincipal" spacing="30">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30" />
+                </padding>
+
+                <!-- ========== CARDS DE ESTATÍSTICAS GERAIS ========== -->
+                <VBox spacing="15">
+                    <Label text="Visão Geral" styleClass="screen-title" />
+
+                    <GridPane fx:id="gridCards" hgap="20" vgap="20">
+
+                        <!-- Card Total de Pets -->
+                        <VBox styleClass="card" alignment="CENTER" spacing="8"
+                              GridPane.columnIndex="0" GridPane.rowIndex="0"
+                              prefWidth="220" prefHeight="140">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20" />
+                            </padding>
+                            <Label text="🐕" style="-fx-font-size: 36px;" />
+                            <Label fx:id="lblTotalPets" text="0" styleClass="screen-title">
+                                <font>
+                                    <Font size="32" />
+                                </font>
+                            </Label>
+                            <Label text="Pets Cadastrados" styleClass="info-label" />
+                        </VBox>
+
+                        <!-- Card Total de Donos -->
+                        <VBox styleClass="card" alignment="CENTER" spacing="8"
+                              GridPane.columnIndex="1" GridPane.rowIndex="0"
+                              prefWidth="220" prefHeight="140">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20" />
+                            </padding>
+                            <Label text="👤" style="-fx-font-size: 36px;" />
+                            <Label fx:id="lblTotalDonos" text="0" styleClass="screen-title">
+                                <font>
+                                    <Font size="32" />
+                                </font>
+                            </Label>
+                            <Label text="Proprietários" styleClass="info-label" />
+                        </VBox>
+
+                        <!-- Card Total de Consultas -->
+                        <VBox styleClass="card" alignment="CENTER" spacing="8"
+                              GridPane.columnIndex="2" GridPane.rowIndex="0"
+                              prefWidth="220" prefHeight="140">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20" />
+                            </padding>
+                            <Label text="📋" style="-fx-font-size: 36px;" />
+                            <Label fx:id="lblTotalConsultas" text="0" styleClass="screen-title">
+                                <font>
+                                    <Font size="32" />
+                                </font>
+                            </Label>
+                            <Label text="Consultas Realizadas" styleClass="info-label" />
+                        </VBox>
+
+                        <!-- Card Total de Vacinas -->
+                        <VBox styleClass="card" alignment="CENTER" spacing="8"
+                              GridPane.columnIndex="3" GridPane.rowIndex="0"
+                              prefWidth="220" prefHeight="140">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20" />
+                            </padding>
+                            <Label text="💉" style="-fx-font-size: 36px;" />
+                            <Label fx:id="lblTotalVacinas" text="0" styleClass="screen-title">
+                                <font>
+                                    <Font size="32" />
+                                </font>
+                            </Label>
+                            <Label text="Vacinas Aplicadas" styleClass="info-label" />
+                        </VBox>
+
+                    </GridPane>
+                </VBox>
+
+                <Separator />
+
+                <!-- ========== GRÁFICOS ========== -->
+                <HBox spacing="30" alignment="TOP_CENTER">
+
+                    <!-- GRÁFICO DE PIZZA: STATUS DAS VACINAS -->
+                    <VBox spacing="10" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                        <Label text="Status das Vacinas dos Pets" styleClass="section-title" />
+                        <PieChart fx:id="chartVacinas" styleClass="chart"
+                                  prefHeight="350" prefWidth="450"
+                                  legendVisible="true" labelsVisible="true" />
+                    </VBox>
+
+                </HBox>
+
+                <!-- GRÁFICO DE BARRAS: CONSULTAS POR MÊS -->
+                <VBox spacing="10" alignment="TOP_CENTER">
+                    <Label text="Consultas por Mês (Últimos 6 meses)" styleClass="section-title" />
+                    <BarChart fx:id="chartConsultas" styleClass="chart"
+                              prefHeight="300" animated="false">
+                        <xAxis>
+                            <CategoryAxis label="Mês" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Quantidade" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- INFORMAÇÕES ADICIONAIS -->
+                <VBox styleClass="card" spacing="10">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20" />
+                    </padding>
+                    <Label text="ℹ️ Informações" styleClass="section-title" />
+                    <Label text="• Os dados são atualizados em tempo real" styleClass="info-label" />
+                    <Label text="• O gráfico de vacinas mostra apenas pets com vacinas registradas" styleClass="info-label" />
+                    <Label text="• Vacinas vencidas há mais de 30 dias são consideradas 'Atrasadas'" styleClass="info-label" />
+                    <Label text="• Consultas são contabilizadas pela data de realização" styleClass="info-label" />
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

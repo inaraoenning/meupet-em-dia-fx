@@ -1,50 +1,48 @@
 # Estrutura do Projeto
 
 ``````text
-ClinicaVeterinaria/
-│
+MeuPetEmDia/
+├── pom.xml
 ├── src/
 │   └── main/
 │       ├── java/
-│       │   └── br/
-│       │       └── com/
-│       │           └── clinica/
-│       │               ├── Main.java
-│       │               │
-│       │               ├── model/
-│       │               │   ├── Dono.java
-│       │               │   ├── Pet.java
-│       │               │   ├── Vacina.java
-│       │               │   ├── Consulta.java
-│       │               │   └── RegistroVacina.java
-│       │               │
-│       │               ├── controller/
-│       │               │   ├── LoginController.java
-│       │               │   ├── MenuPrincipalController.java
-│       │               │   ├── CadastroDonosController.java
-│       │               │   ├── CadastroPetsController.java
-│       │               │   ├── CadastroVacinasConsultasController.java
-│       │               │   ├── ProximasVacinasController.java
-│       │               │   └── RelatoriosController.java
-│       │               │
-│       │               ├── dao/
-│       │               │   ├── DonoDAO.java
-│       │               │   ├── PetDAO.java
-│       │               │   ├── VacinaDAO.java
-│       │               │   └── ConsultaDAO.java
-│       │               │
-│       │               ├── service/
-│       │               │   ├── FirebaseAuthService.java
-│       │               │   ├── VacinaService.java
-│       │               │   └── RelatorioService.java
-│       │               │
-│       │               └── util/
-│       │                   ├── NavigationUtil.java
-│       │                   ├── ValidationUtil.java
-│       │                   └── AlertUtil.java
+│       │   └── clinicaveterinaria/meupetemdia/
+│       │       ├── Main.java
+│       │       │
+│       │       ├── config/
+│       │       │   └── DatabaseConfig.java
+│       │       │
+│       │       ├── controller/
+│       │       │   ├── LoginController.java
+│       │       │   ├── MenuPrincipalController.java
+│       │       │   ├── CadastroDonosController.java
+│       │       │   ├── CadastroPetsController.java
+│       │       │   ├── CadastroVacinasConsultasController.java
+│       │       │   ├── ProximasVacinasController.java
+│       │       │   └── RelatoriosController.java
+│       │       │
+│       │       ├── model/
+│       │       │   ├── Dono.java
+│       │       │   ├── Pet.java
+│       │       │   ├── Vacina.java
+│       │       │   ├── Consulta.java
+│       │       │   └── RegistroVacina.java
+│       │       │
+│       │       ├── dao/
+│       │       │   ├── DonoDAO.java
+│       │       │   ├── PetDAO.java
+│       │       │   ├── VacinaDAO.java
+│       │       │   ├── ConsultaDAO.java
+│       │       │   └── RegistroVacinaDAO.java
+│       │       │
+│       │       ├── service/
+│       │       │   └── AuthService.java
+│       │       │
+│       │       └── util/
+│       │           └── NavigationUtil.java
 │       │
 │       └── resources/
-│           ├── fxml/
+│           ├── clinicaveterinaria/meupetemdia/view/
 │           │   ├── login.fxml
 │           │   ├── menuPrincipal.fxml
 │           │   ├── cadastroDonos.fxml
@@ -53,27 +51,8 @@ ClinicaVeterinaria/
 │           │   ├── proximasVacinas.fxml
 │           │   └── relatorios.fxml
 │           │
-│           ├── css/
-│           │   └── style.css
-│           │
-│           ├── images/
-│           │   ├── logo.png
-│           │   ├── icon-dono.png
-│           │   ├── icon-pet.png
-│           │   ├── icon-vacina.png
-│           │   └── icon-relatorio.png
-│           │
-│           └── firebase/
-│               └── serviceAccountKey.json
+│           └── css/
+│               └── style.css
 │
-├── test/
-│   └── java/
-│       └── br/
-│           └── com/
-│               └── clinica/
-│                   ├── model/
-│                   ├── service/
-│                   └── util/
-│
-└── pom.xml
+└── meupetemdia.db (criado automaticamente)
 ``````
