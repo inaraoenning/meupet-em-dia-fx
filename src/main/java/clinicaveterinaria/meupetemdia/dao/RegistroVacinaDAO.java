@@ -59,10 +59,11 @@ public class RegistroVacinaDAO {
 
     public List<RegistroVacina> findAll() {
         List<RegistroVacina> registros = new ArrayList<>();
-        String sql = "SELECT rv.*, p.nome as pet_nome, v.nome as vacina_nome " +
+        String sql = "SELECT rv.*, p.nome as pet_nome, v.nome as vacina_nome, d.nome as dono_nome " +
                 "FROM registros_vacinas rv " +
                 "INNER JOIN pets p ON rv.pet_id = p.id " +
                 "INNER JOIN vacinas v ON rv.vacina_id = v.id " +
+                "INNER JOIN donos d ON p.dono_id = d.id " +
                 "ORDER BY rv.data_aplicacao DESC";
 
         try (Connection conn = DatabaseConfig.connect();

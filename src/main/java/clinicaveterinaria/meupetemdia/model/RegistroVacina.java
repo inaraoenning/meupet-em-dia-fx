@@ -10,6 +10,7 @@ public class RegistroVacina {
     private Integer id;
     private Integer petId;
     private String petNome; // Para exibição
+    private String donoNome; // Para exibição
     private Integer vacinaId;
     private String vacinaNome; // Para exibição
     private LocalDate dataAplicacao;
@@ -67,6 +68,14 @@ public class RegistroVacina {
 
     public void setPetNome(String petNome) {
         this.petNome = petNome;
+    }
+
+    public String getDonoNome() {
+        return donoNome;
+    }
+
+    public void setDonoNome(String donoNome) {
+        this.donoNome = donoNome;
     }
 
     public Integer getVacinaId() {
