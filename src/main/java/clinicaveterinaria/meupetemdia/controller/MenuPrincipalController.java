@@ -34,10 +34,11 @@ public class MenuPrincipalController {
     // INICIALIZAÇÃO
     @FXML
     private void initialize() {
-        // Carregar informações do usuário logado
+        lblUsuario.setText("Bem-vindo");
+        // Carregar informações do usuário logado (não implementado ainda)
         carregarInformacoesUsuario();
 
-        // Adicionar efeitos visuais aos botões (opcional)
+        // Adicionar efeitos visuais aos botões (não implementado ainda)
         adicionarEfeitosVisuais();
     }
 
@@ -50,19 +51,18 @@ public class MenuPrincipalController {
         //     lblUsuario.setText("Bem-vindo, " + user.getDisplayName());
         // }
 
-        // SIMULAÇÃO TEMPORÁRIA
+        // TEMPORÁRIO
         lblUsuario.setText("Bem-vindo");
     }
 
 
-    // Adiciona efeitos visuais adicionais aos cards (opcional)
+    // TODO: Adiciona efeitos visuais adicionais aos cards (opcional)
     private void adicionarEfeitosVisuais() {
-        // Aqui você pode adicionar animações ou efeitos extras
-        // Por exemplo: animação de entrada dos cards
+        //
+        //
     }
 
     // NAVEGAÇÃO PARA TELAS
-
 
     // Navega para a tela de Cadastro de Donos
     @FXML

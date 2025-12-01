@@ -1,74 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/21"
-      fx:controller="clinicaveterinaria.meupetemdia.controller.LoginController"
-      styleClass="root-container"
-      alignment="CENTER"
-      spacing="30"
-      prefHeight="768.0"
-      prefWidth="1024.0">
+
+<VBox alignment="CENTER" prefHeight="768.0" prefWidth="1024.0" spacing="30" styleClass="root-container" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicaveterinaria.meupetemdia.controller.LoginController">
 
     <!-- CABEÇALHO COM LOGO E TÍTULO -->
-    <VBox alignment="CENTER" spacing="10">
+    <VBox alignment="CENTER" prefHeight="169.0" prefWidth="1024.0" spacing="10">
         <ImageView fx:id="imgLogo" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
-            <!-- Adicione sua logo aqui -->
-            <!-- <image><Image url="@/images/logo.png" /></image> -->
+
+             <image><Image url="@../img/logo.png" /></image>
         </ImageView>
 
-        <Label fx:id="lblTitulo" text="Meu Pet em Dia" styleClass="app-title"/>
-        <Label fx:id="lblSubtitulo" text="Sistema de Gestão Veterinária" styleClass="section-title"/>
+        <Label fx:id="lblTitulo" styleClass="app-title" text="Meu Pet em Dia" />
+        <Label fx:id="lblSubtitulo" styleClass="section-title" text="Sistema de Gestão Veterinária" />
     </VBox>
 
     <!-- CARD DO FORMULÁRIO DE LOGIN -->
-    <VBox fx:id="vboxFormulario" styleClass="card" alignment="CENTER" spacing="15" maxWidth="400" prefWidth="400">
+    <VBox fx:id="vboxFormulario" alignment="CENTER" maxWidth="400" prefWidth="400" spacing="15" styleClass="card">
         <padding>
-            <Insets top="30" right="40" bottom="30" left="40"/>
+            <Insets bottom="30" left="40" right="40" top="30" />
         </padding>
 
         <!-- TÍTULO DO FORMULÁRIO -->
-        <Label text="Entrar no Sistema" styleClass="screen-title"/>
+        <Label styleClass="screen-title" text="Entrar no Sistema" />
 
         <!-- CAMPO E-MAIL -->
         <VBox spacing="5">
-            <Label text="E-mail:" styleClass="form-label"/>
-            <TextField fx:id="txtEmail" promptText="Digite seu e-mail" styleClass="text-field"/>
-            <Label fx:id="lblErroEmail" styleClass="error-label" visible="false" managed="false"/>
+            <Label styleClass="form-label" text="E-mail:" />
+            <TextField fx:id="txtEmail" promptText="Digite seu e-mail" styleClass="text-field" />
+            <Label fx:id="lblErroEmail" managed="false" styleClass="error-label" visible="false" />
         </VBox>
 
         <!-- CAMPO SENHA -->
         <VBox spacing="5">
-            <Label text="Senha:" styleClass="form-label"/>
-            <PasswordField fx:id="txtSenha" promptText="Digite sua senha" styleClass="password-field"/>
-            <Label fx:id="lblErroSenha" styleClass="error-label" visible="false" managed="false"/>
+            <Label styleClass="form-label" text="Senha:" />
+            <PasswordField fx:id="txtSenha" promptText="Digite sua senha" styleClass="password-field" />
+            <Label fx:id="lblErroSenha" managed="false" styleClass="error-label" visible="false" />
         </VBox>
 
         <!-- BOTÃO ENTRAR -->
-        <Button fx:id="btnEntrar" text="Entrar" styleClass="primary-button" maxWidth="Infinity"
-                onAction="#handleLogin">
+        <Button fx:id="btnEntrar" maxWidth="Infinity" onAction="#handleLogin" styleClass="primary-button" text="Entrar">
             <VBox.margin>
-                <Insets top="10"/>
+                <Insets top="10" />
             </VBox.margin>
         </Button>
 
         <!-- MENSAGEM DE ERRO GERAL -->
-        <Label fx:id="lblErroGeral" styleClass="error-label" wrapText="true" textAlignment="CENTER"
-               visible="false" managed="false"/>
+        <Label fx:id="lblErroGeral" managed="false" styleClass="error-label" textAlignment="CENTER" visible="false" wrapText="true" />
 
         <!-- INDICADOR DE CARREGAMENTO -->
-        <ProgressIndicator fx:id="progressIndicator" prefHeight="40.0" prefWidth="40.0"
-                           visible="false" managed="false"/>
+        <ProgressIndicator fx:id="progressIndicator" managed="false" prefHeight="40.0" prefWidth="40.0" visible="false" />
     </VBox>
 
     <!-- RODAPÉ (OPCIONAL) -->
-    <Label text="© 2025 Clínica Veterinária - Todos os direitos reservados"
-           styleClass="info-label">
+    <Label styleClass="info-label" text="© 2025 Clínica Veterinária - Todos os direitos reservados">
         <VBox.margin>
-            <Insets top="30"/>
+            <Insets top="30" />
         </VBox.margin>
     </Label>
 

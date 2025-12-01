@@ -3,36 +3,31 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="clinicaveterinaria.meupetemdia.controller.MenuPrincipalController"
-            styleClass="root-container"
-            prefHeight="768.0"
-            prefWidth="1024.0">
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" styleClass="root-container" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicaveterinaria.meupetemdia.controller.MenuPrincipalController">
 
     <!-- ========== BARRA SUPERIOR (HEADER) ========== -->
     <top>
-        <HBox fx:id="hboxHeader" styleClass="header-bar" alignment="CENTER_LEFT" spacing="20">
+        <HBox fx:id="hboxHeader" alignment="CENTER_LEFT" spacing="20" styleClass="header-bar">
             <padding>
-                <Insets top="15" right="30" bottom="15" left="30"/>
+                <Insets bottom="15" left="30" right="30" top="15" />
             </padding>
 
             <!-- Título do Sistema -->
-            <Label fx:id="lblTitulo" text="🐾 Meu Pet em Dia" styleClass="app-title">
+            <Label fx:id="lblTitulo" styleClass="app-title" text="🐾 Meu Pet em Dia">
                 <HBox.hgrow>ALWAYS</HBox.hgrow>
             </Label>
 
             <!-- Informações do Usuário -->
             <HBox alignment="CENTER_RIGHT" spacing="15">
-                <Label fx:id="lblUsuario" text="Bem-vindo, Usuário" styleClass="app-title">
+                <Label fx:id="lblUsuario" styleClass="app-title" text="Bem-vindo">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
 
-                <Button fx:id="btnLogout" text="Sair" styleClass="secondary-button"
-                        onAction="#handleLogout"/>
+                <Button fx:id="btnLogout" onAction="#handleLogout" styleClass="secondary-button" text="Sair" />
             </HBox>
         </HBox>
     </top>
@@ -41,88 +36,77 @@
     <center>
         <VBox fx:id="vboxMenuPrincipal" alignment="CENTER" spacing="30">
             <padding>
-                <Insets top="40" right="40" bottom="40" left="40"/>
+                <Insets bottom="40" left="40" right="40" top="40" />
             </padding>
 
             <!-- Título da Seção -->
-            <Label fx:id="lblSubtitulo" text="Selecione uma opção" styleClass="screen-title"/>
+            <Label fx:id="lblSubtitulo" styleClass="screen-title" text="Selecione uma opção" />
 
             <!-- Grid de Botões do Menu -->
-            <GridPane fx:id="gridMenuButtons" hgap="25" vgap="25" alignment="CENTER">
+            <GridPane fx:id="gridMenuButtons" alignment="CENTER" hgap="25" vgap="25">
                 <columnConstraints>
-                    <ColumnConstraints minWidth="250" prefWidth="250"/>
-                    <ColumnConstraints minWidth="250" prefWidth="250"/>
+                    <ColumnConstraints minWidth="250" prefWidth="250" />
+                    <ColumnConstraints minWidth="250" prefWidth="250" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="150" prefHeight="150"/>
-                    <RowConstraints minHeight="150" prefHeight="150"/>
-                    <RowConstraints minHeight="150" prefHeight="150"/>
+                    <RowConstraints minHeight="150" prefHeight="150" />
+                    <RowConstraints minHeight="150" prefHeight="150" />
+                    <RowConstraints minHeight="150" prefHeight="150" />
                 </rowConstraints>
 
                 <!-- BOTÃO 1: CADASTRO DE DONOS -->
-                <VBox fx:id="btnCadastroDonos" styleClass="menu-button" alignment="CENTER"
-                      spacing="10" onMouseClicked="#handleCadastroDonos"
-                      GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <VBox fx:id="btnCadastroDonos" alignment="CENTER" onMouseClicked="#handleCadastroDonos" spacing="10" styleClass="menu-button" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
 
-                    <Label text="👤" style="-fx-font-size: 48px;"/>
-                    <Label text="Cadastro de Donos" styleClass="section-title"/>
-                    <Label text="Gerenciar proprietários" styleClass="info-label"/>
+                    <Label style="-fx-font-size: 48px;" text="👤" />
+                    <Label styleClass="section-title" text="Cadastro de Donos" />
+                    <Label styleClass="info-label" text="Gerenciar proprietários" />
                 </VBox>
 
                 <!-- BOTÃO 2: CADASTRO DE PETS -->
-                <VBox fx:id="btnCadastroPets" styleClass="menu-button" alignment="CENTER"
-                      spacing="10" onMouseClicked="#handleCadastroPets"
-                      GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <VBox fx:id="btnCadastroPets" alignment="CENTER" onMouseClicked="#handleCadastroPets" spacing="10" styleClass="menu-button" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
 
-                    <Label text="🐕" style="-fx-font-size: 48px;"/>
-                    <Label text="Cadastro de Pets" styleClass="section-title"/>
-                    <Label text="Gerenciar animais" styleClass="info-label"/>
+                    <Label style="-fx-font-size: 48px;" text="🐕" />
+                    <Label styleClass="section-title" text="Cadastro de Pets" />
+                    <Label styleClass="info-label" text="Gerenciar animais" />
                 </VBox>
 
                 <!-- BOTÃO 3: VACINAS E CONSULTAS -->
-                <VBox fx:id="btnVacinasConsultas" styleClass="menu-button" alignment="CENTER"
-                      spacing="10" onMouseClicked="#handleVacinasConsultas"
-                      GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <VBox fx:id="btnVacinasConsultas" alignment="CENTER" onMouseClicked="#handleVacinasConsultas" spacing="10" styleClass="menu-button" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
 
-                    <Label text="💉" style="-fx-font-size: 48px;"/>
-                    <Label text="Vacinas e Consultas" styleClass="section-title"/>
-                    <Label text="Registrar atendimentos" styleClass="info-label"/>
+                    <Label style="-fx-font-size: 48px;" text="💉" />
+                    <Label styleClass="section-title" text="Vacinas e Consultas" />
+                    <Label styleClass="info-label" text="Registrar atendimentos" />
                 </VBox>
 
                 <!-- BOTÃO 4: PRÓXIMAS VACINAS -->
-                <VBox fx:id="btnProximasVacinas" styleClass="menu-button" alignment="CENTER"
-                      spacing="10" onMouseClicked="#handleProximasVacinas"
-                      GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <VBox fx:id="btnProximasVacinas" alignment="CENTER" onMouseClicked="#handleProximasVacinas" spacing="10" styleClass="menu-button" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
 
-                    <Label text="📅" style="-fx-font-size: 48px;"/>
-                    <Label text="Próximas Vacinas" styleClass="section-title"/>
-                    <Label text="Visualizar agenda" styleClass="info-label"/>
+                    <Label style="-fx-font-size: 48px;" text="📅" />
+                    <Label styleClass="section-title" text="Próximas Vacinas" />
+                    <Label styleClass="info-label" text="Visualizar agenda" />
                 </VBox>
 
                 <!-- BOTÃO 5: RELATÓRIOS -->
-                <VBox fx:id="btnRelatorios" styleClass="menu-button" alignment="CENTER"
-                      spacing="10" onMouseClicked="#handleRelatorios"
-                      GridPane.columnIndex="0" GridPane.rowIndex="2"
-                      GridPane.columnSpan="2">
+                <VBox fx:id="btnRelatorios" alignment="CENTER" onMouseClicked="#handleRelatorios" spacing="10" styleClass="menu-button" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
 
-                    <Label text="📊" style="-fx-font-size: 48px;"/>
-                    <Label text="Relatórios e Gráficos" styleClass="section-title"/>
-                    <Label text="Estatísticas e análises" styleClass="info-label"/>
+                    <Label style="-fx-font-size: 48px;" text="📊" />
+                    <Label styleClass="section-title" text="Relatórios e Gráficos" />
+                    <Label styleClass="info-label" text="Estatísticas e análises" />
                 </VBox>
 
             </GridPane>
@@ -133,10 +117,9 @@
     <bottom>
         <HBox alignment="CENTER" styleClass="root-container">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <Label text="© 2025 Clínica Veterinária - Sistema Meu Pet em Dia - Todos os direitos reservados"
-                   styleClass="info-label"/>
+            <Label styleClass="info-label" text="© 2025 Clínica Veterinária - Sistema Meu Pet em Dia - Todos os direitos reservados" />
         </HBox>
     </bottom>
 
