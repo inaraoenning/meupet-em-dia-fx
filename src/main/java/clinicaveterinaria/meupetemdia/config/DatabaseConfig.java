@@ -62,7 +62,7 @@ public class DatabaseConfig {
                 """;
 
 
-        String registro = """
+        String tableRegistro = """
                     CREATE TABLE IF NOT EXISTS vacinas (
                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                                    nome TEXT NOT NULL,
@@ -71,7 +71,7 @@ public class DatabaseConfig {
                                );
                 """;
 
-        String consultas = """
+        String tableConsultas = """
                     CREATE TABLE IF NOT EXISTS consultas (
                                      id INTEGER PRIMARY KEY AUTOINCREMENT,
                                      pet_id INTEGER NOT NULL,
@@ -89,8 +89,8 @@ public class DatabaseConfig {
             stmt.execute(tableDonos);
             stmt.execute(tablePets);
             stmt.execute(tableVacinas);
-            stmt.execute(registro);
-            stmt.execute(consultas);
+            stmt.execute(tableRegistro);
+            stmt.execute(tableConsultas);
 
             System.out.println("Tabelas criadas/verificadas com sucesso!");
 

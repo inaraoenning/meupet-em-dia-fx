@@ -23,12 +23,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controller da tela de Vacinas e Consultas
- */
+
+// Controller da tela de Vacinas e Consultas
 public class CadastroVacinasConsultasController {
 
-    // ========== COMPONENTES DO FORMULÁRIO ==========
+    // COMPONENTES DO FORMULÁRIO
     @FXML
     private RadioButton rbConsulta;
     @FXML
@@ -79,7 +78,7 @@ public class CadastroVacinasConsultasController {
     @FXML
     private Button btnLimpar;
 
-    // ========== COMPONENTES DA TABELA ==========
+    // COMPONENTES DA TABELA
     @FXML
     private ComboBox<String> cmbFiltroTipo;
     @FXML
@@ -106,7 +105,7 @@ public class CadastroVacinasConsultasController {
     @FXML
     private Button btnExcluir;
 
-    // ========== DADOS ==========
+    // DADOS
     private ObservableList<Pet> listaPets;
     private ObservableList<Vacina> listaVacinas;
     private ObservableList<RegistroAtendimento> listaRegistros;
@@ -119,7 +118,7 @@ public class CadastroVacinasConsultasController {
 
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    // ========== INICIALIZAÇÃO ==========
+    // INICIALIZAÇÃO
     @FXML
     private void initialize() {
         petDAO = new PetDAO();
@@ -136,9 +135,8 @@ public class CadastroVacinasConsultasController {
         atualizarCamposVisiveis();
     }
 
-    /**
-     * Configura o toggle entre Consulta e Vacina
-     */
+
+    // Configura o toggle entre Consulta e Vacina
     private void configurarToggleTipo() {
         toggleTipo.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
             atualizarCamposVisiveis();
@@ -146,9 +144,8 @@ public class CadastroVacinasConsultasController {
         });
     }
 
-    /**
-     * Atualiza visibilidade dos campos baseado no tipo selecionado
-     */
+
+    // Atualiza visibilidade dos campos baseado no tipo selecionado
     private void atualizarCamposVisiveis() {
         boolean isConsulta = rbConsulta.isSelected();
 
@@ -169,9 +166,8 @@ public class CadastroVacinasConsultasController {
         vboxProximaDose.setManaged(!isConsulta);
     }
 
-    /**
-     * Configura os ComboBoxes
-     */
+
+    // Configura os ComboBoxes
     private void configurarComboBoxes() {
         // ComboBox de Pets
         cmbPet.setConverter(new StringConverter<Pet>() {
@@ -227,9 +223,8 @@ public class CadastroVacinasConsultasController {
         cmbFiltroTipo.setValue("Todos");
     }
 
-    /**
-     * Configura a tabela
-     */
+
+    // Configura a tabela
     private void configurarTabela() {
         colId.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleIntegerProperty(data.getValue().getId()).asObject());
@@ -254,9 +249,8 @@ public class CadastroVacinasConsultasController {
         });
     }
 
-    /**
-     * Configura busca e filtros
-     */
+
+    // Configura busca e filtros
     private void configurarBusca() {
         // Busca por texto
         txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
@@ -294,9 +288,8 @@ public class CadastroVacinasConsultasController {
         }
     }
 
-    /**
-     * Configura listeners
-     */
+
+    // Configura listeners
     private void configurarListeners() {
         cmbPet.valueProperty().addListener((obs, oldVal, newVal) ->
                 limparErro(cmbPet, lblErroPet));
@@ -308,9 +301,8 @@ public class CadastroVacinasConsultasController {
                 limparErro(cmbVacina, lblErroVacina));
     }
 
-    /**
-     * Carrega dados iniciais
-     */
+
+    // Carrega dados iniciais
     private void carregarDados() {
         try {
             listaPets = FXCollections.observableArrayList(petDAO.findAll());
@@ -326,9 +318,8 @@ public class CadastroVacinasConsultasController {
         }
     }
 
-    /**
-     * Carrega registros (consultas + vacinas)
-     */
+
+    // Carrega registros (consultas + vacinas)
     private void carregarRegistros() {
         try {
             listaRegistros = FXCollections.observableArrayList();
@@ -357,7 +348,7 @@ public class CadastroVacinasConsultasController {
         }
     }
 
-    // ========== AÇÕES ==========
+    // AÇÕES
 
     @FXML
     private void handleVoltar() {
@@ -465,7 +456,7 @@ public class CadastroVacinasConsultasController {
         }
     }
 
-    // ========== VALIDAÇÕES ==========
+    // VALIDAÇÕES
 
     private boolean validarCampos() {
         boolean valido = true;
@@ -501,7 +492,7 @@ public class CadastroVacinasConsultasController {
         return valido;
     }
 
-    // ========== AUXILIARES ==========
+    // AUXILIARES
 
     private void limparFormulario() {
         cmbPet.setValue(null);
@@ -553,11 +544,10 @@ public class CadastroVacinasConsultasController {
         alert.showAndWait();
     }
 
-    // ========== CLASSE INTERNA PARA UNIFICAR TABELA ==========
+    // CLASSE INTERNA PARA UNIFICAR TABELA
 
-    /**
-     * Classe auxiliar para unificar Consultas e Vacinas na mesma tabela
-     */
+
+    // Classe auxiliar para unificar Consultas e Vacinas na mesma tabela
     public static class RegistroAtendimento {
         private int id;
         private String tipo;

@@ -1,18 +1,17 @@
 package clinicaveterinaria.meupetemdia.controller;
 
+import clinicaveterinaria.meupetemdia.dao.PetDAO;
+import clinicaveterinaria.meupetemdia.dao.RegistroVacinaDAO;
+import clinicaveterinaria.meupetemdia.model.Pet;
+import clinicaveterinaria.meupetemdia.model.RegistroVacina;
+import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
-import clinicaveterinaria.meupetemdia.model.Pet;
-import clinicaveterinaria.meupetemdia.model.RegistroVacina;
-import clinicaveterinaria.meupetemdia.dao.PetDAO;
-import clinicaveterinaria.meupetemdia.dao.RegistroVacinaDAO;
-import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,30 +20,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Controller da tela de Próximas Vacinas
- */
+
+// Controller da tela de Próximas Vacinas
 public class ProximasVacinasController {
 
-    // ========== COMPONENTES ==========
-    @FXML private ComboBox<String> cmbFiltroStatus;
-    @FXML private ComboBox<Pet> cmbFiltroPet;
-    @FXML private Button btnAtualizar;
+    // COMPONENTES
+    @FXML
+    private ComboBox<String> cmbFiltroStatus;
+    @FXML
+    private ComboBox<Pet> cmbFiltroPet;
+    @FXML
+    private Button btnAtualizar;
 
-    @FXML private TableView<VacinaInfo> tblProximasVacinas;
-    @FXML private TableColumn<VacinaInfo, String> colStatus;
-    @FXML private TableColumn<VacinaInfo, String> colPet;
-    @FXML private TableColumn<VacinaInfo, String> colDono;
-    @FXML private TableColumn<VacinaInfo, String> colVacina;
-    @FXML private TableColumn<VacinaInfo, String> colUltimaDose;
-    @FXML private TableColumn<VacinaInfo, String> colProximaDose;
-    @FXML private TableColumn<VacinaInfo, String> colDiasRestantes;
+    @FXML
+    private TableView<VacinaInfo> tblProximasVacinas;
+    @FXML
+    private TableColumn<VacinaInfo, String> colStatus;
+    @FXML
+    private TableColumn<VacinaInfo, String> colPet;
+    @FXML
+    private TableColumn<VacinaInfo, String> colDono;
+    @FXML
+    private TableColumn<VacinaInfo, String> colVacina;
+    @FXML
+    private TableColumn<VacinaInfo, String> colUltimaDose;
+    @FXML
+    private TableColumn<VacinaInfo, String> colProximaDose;
+    @FXML
+    private TableColumn<VacinaInfo, String> colDiasRestantes;
 
-    @FXML private Label lblTotal;
-    @FXML private Label lblVencidas;
-    @FXML private Label lblProximas;
+    @FXML
+    private Label lblTotal;
+    @FXML
+    private Label lblVencidas;
+    @FXML
+    private Label lblProximas;
 
-    // ========== DADOS ==========
+    // DADOS
     private ObservableList<VacinaInfo> listaVacinas;
     private FilteredList<VacinaInfo> vacinasFiltradas;
     private ObservableList<Pet> listaPets;
@@ -54,7 +66,7 @@ public class ProximasVacinasController {
 
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    // ========== INICIALIZAÇÃO ==========
+    // INICIALIZAÇÃO
     @FXML
     private void initialize() {
         registroVacinaDAO = new RegistroVacinaDAO();
@@ -66,9 +78,8 @@ public class ProximasVacinasController {
         carregarDados();
     }
 
-    /**
-     * Configura os ComboBoxes
-     */
+
+    // Configura os ComboBoxes
     private void configurarComboBoxes() {
         // ComboBox de Status
         cmbFiltroStatus.setItems(FXCollections.observableArrayList(
@@ -90,9 +101,8 @@ public class ProximasVacinasController {
         });
     }
 
-    /**
-     * Configura a tabela
-     */
+
+    // Configura a tabela
     private void configurarTabela() {
         colStatus.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getStatusTexto()));
@@ -165,9 +175,7 @@ public class ProximasVacinasController {
         });
     }
 
-    /**
-     * Configura filtros
-     */
+    // Configura filtros
     private void configurarFiltros() {
         cmbFiltroStatus.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
         cmbFiltroPet.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
@@ -207,9 +215,8 @@ public class ProximasVacinasController {
         }
     }
 
-    /**
-     * Carrega dados
-     */
+
+    // Carrega dados
     private void carregarDados() {
         try {
             // Carregar pets para o filtro
@@ -225,9 +232,8 @@ public class ProximasVacinasController {
         }
     }
 
-    /**
-     * Carrega vacinas e calcula status
-     */
+
+    // Carrega vacinas e calcula status
     private void carregarVacinas() {
         try {
             List<RegistroVacina> registros = registroVacinaDAO.findAll();
@@ -269,9 +275,7 @@ public class ProximasVacinasController {
         }
     }
 
-    /**
-     * Atualiza contadores do dashboard
-     */
+    // Atualiza contadores do dashboard
     private void atualizarContadores() {
         int total = vacinasFiltradas.size();
         int vencidas = 0;
@@ -293,7 +297,7 @@ public class ProximasVacinasController {
         lblProximas.setText(String.valueOf(proximas));
     }
 
-    // ========== AÇÕES ==========
+    // AÇÕES
 
     @FXML
     private void handleVoltar() {
@@ -306,7 +310,7 @@ public class ProximasVacinasController {
         mostrarSucesso("Dados atualizados!");
     }
 
-    // ========== AUXILIARES ==========
+    // AUXILIARES
 
     private void mostrarSucesso(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -324,18 +328,16 @@ public class ProximasVacinasController {
         alert.showAndWait();
     }
 
-    // ========== CLASSES AUXILIARES ==========
+    // CLASSES AUXILIARES
 
-    /**
-     * Enum para status da vacina
-     */
+
+    // Enum para status da vacina
     public enum StatusVacina {
         VENCIDA, PROXIMA, EM_DIA
     }
 
-    /**
-     * Classe para encapsular informações da vacina com status calculado
-     */
+
+    // Classe para encapsular informações da vacina com status calculado
     public static class VacinaInfo {
         private final RegistroVacina registro;
         private final StatusVacina status;
@@ -365,10 +367,14 @@ public class ProximasVacinasController {
 
         public String getStatusTexto() {
             switch (status) {
-                case VENCIDA: return "❌ Vencida";
-                case PROXIMA: return "⚠️ Próxima";
-                case EM_DIA: return "✅ Em dia";
-                default: return "";
+                case VENCIDA:
+                    return "❌ Vencida";
+                case PROXIMA:
+                    return "⚠️ Próxima";
+                case EM_DIA:
+                    return "✅ Em dia";
+                default:
+                    return "";
             }
         }
 
@@ -402,4 +408,43 @@ public class ProximasVacinasController {
             }
         }
     }
+
+    @FXML
+    private void handleAvisarDono() {
+        VacinaInfo selecionada = tblProximasVacinas.getSelectionModel().getSelectedItem();
+
+        if (selecionada == null) {
+            mostrarErro("Selecione uma vacina na lista para avisar o dono.");
+            return;
+        }
+
+        String telefone = selecionada.getRegistro().getTelefone();
+        if (telefone == null || telefone.isBlank()) {
+            mostrarErro("O dono não possui telefone cadastrado.");
+            return;
+        }
+
+        // Formatar para WhatsApp
+        telefone = telefone.replaceAll("\\D", ""); // remove símbolos
+        if (!telefone.startsWith("55")) {
+            telefone = "55" + telefone; // adiciona DDI se faltar
+        }
+
+        String mensagem = "Olá *" + selecionada.getDonoNome() + "*, tudo bem? "
+                + "Aqui é da Clínica Veterinária. "
+                + "A vacina *" + selecionada.getVacinaNome() + "* do pet *" + selecionada.getPetNome()
+                + "* está prevista para: *" + selecionada.getProximaDoseFormatada() + "*.";
+
+        try {
+            String url = "https://wa.me/" + telefone + "?text=" +
+                    java.net.URLEncoder.encode(mensagem, "UTF-8");
+
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+
+            mostrarSucesso("Abrindo WhatsApp Web...");
+        } catch (Exception e) {
+            mostrarErro("Erro ao abrir WhatsApp: " + e.getMessage());
+        }
+    }
+
 }

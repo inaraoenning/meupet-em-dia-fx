@@ -2,9 +2,8 @@ package clinicaveterinaria.meupetemdia.model;
 
 import java.time.LocalDate;
 
-/**
- * Classe que representa uma Consulta veterinária
- */
+
+// Representa uma Consulta veterinária
 public class Consulta {
 
     private Integer id;
@@ -15,7 +14,7 @@ public class Consulta {
     private String veterinario;
     private String observacoes;
 
-    // ========== CONSTRUTORES ==========
+    // CONSTRUTORES
 
     public Consulta() {
     }
@@ -39,7 +38,7 @@ public class Consulta {
         this.observacoes = observacoes;
     }
 
-    // ========== GETTERS E SETTERS ==========
+    // GETTERS E SETTERS
 
     public Integer getId() {
         return id;
@@ -97,7 +96,7 @@ public class Consulta {
         this.observacoes = observacoes;
     }
 
-    // ========== MÉTODOS AUXILIARES ==========
+    // MÉTODOS AUXILIARES
 
     @Override
     public String toString() {

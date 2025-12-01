@@ -7,13 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO para operações CRUD de Donos no SQLite
- */
+
+// DAO para operações CRUD de Donos no SQLite
+
 public class DonoDAO {
 
     /**
      * Insere um novo dono no banco
+     *
      * @param dono Dono a ser inserido
      * @return ID gerado ou -1 em caso de erro
      */
@@ -47,6 +48,7 @@ public class DonoDAO {
 
     /**
      * Atualiza um dono existente
+     *
      * @param dono Dono com dados atualizados
      * @return true se atualizado com sucesso
      */
@@ -75,6 +77,7 @@ public class DonoDAO {
 
     /**
      * Exclui um dono pelo ID
+     *
      * @param id ID do dono
      * @return true se excluído com sucesso
      */
@@ -97,6 +100,7 @@ public class DonoDAO {
 
     /**
      * Busca um dono pelo ID
+     *
      * @param id ID do dono
      * @return Dono encontrado ou null
      */
@@ -123,6 +127,7 @@ public class DonoDAO {
 
     /**
      * Retorna todos os donos cadastrados
+     *
      * @return Lista de donos
      */
     public List<Dono> findAll() {
@@ -147,6 +152,7 @@ public class DonoDAO {
 
     /**
      * Busca donos por nome (parcial)
+     *
      * @param nome Nome ou parte do nome
      * @return Lista de donos encontrados
      */
@@ -174,6 +180,7 @@ public class DonoDAO {
 
     /**
      * Busca dono por e-mail
+     *
      * @param email E-mail do dono
      * @return Dono encontrado ou null
      */
@@ -200,6 +207,7 @@ public class DonoDAO {
 
     /**
      * Verifica se um e-mail já está cadastrado
+     *
      * @param email E-mail a verificar
      * @return true se existe, false caso contrário
      */
@@ -210,7 +218,8 @@ public class DonoDAO {
     /**
      * Verifica se um e-mail já está cadastrado (excluindo um ID específico)
      * Útil para validação na edição
-     * @param email E-mail a verificar
+     *
+     * @param email     E-mail a verificar
      * @param excludeId ID a excluir da verificação
      * @return true se existe, false caso contrário
      */
@@ -237,6 +246,7 @@ public class DonoDAO {
 
     /**
      * Converte ResultSet em objeto Dono
+     *
      * @param rs ResultSet do banco
      * @return Objeto Dono
      */

@@ -2,9 +2,8 @@ package clinicaveterinaria.meupetemdia.model;
 
 import java.time.LocalDate;
 
-/**
- * Classe que representa um Pet
- */
+
+ // Classe Pet
 public class Pet {
 
     private Integer id;
@@ -15,7 +14,7 @@ public class Pet {
     private Integer donoId;
     private String donoNome; // Para exibição na tabela
 
-    // ========== CONSTRUTORES ==========
+    // CONSTRUTORES
 
     public Pet() {
     }
@@ -39,7 +38,7 @@ public class Pet {
         this.donoId = donoId;
     }
 
-    // ========== GETTERS E SETTERS ==========
+    // GETTERS E SETTERS
 
     public Integer getId() {
         return id;
@@ -97,12 +96,11 @@ public class Pet {
         this.donoNome = donoNome;
     }
 
-    // ========== MÉTODOS AUXILIARES ==========
+    // MÉTODOS AUXILIARES
 
-    /**
-     * Calcula a idade do pet em anos
-     * @return Idade em anos ou 0 se data de nascimento não informada
-     */
+
+    // Calcula a idade do pet em anos
+    // @return Idade em anos ou 0 se data de nascimento não informada
     public int getIdade() {
         if (dataNascimento == null) {
             return 0;

@@ -5,10 +5,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-/**
- * Controller da tela de Login
- * Responsável pela autenticação via Firebase Authentication
- */
+
+//Controller da tela de Login
+//Responsável pela autenticação
+
 public class LoginController {
 
     // COMPONENTES
@@ -57,9 +57,7 @@ public class LoginController {
         }
 
 
-        // Integração com AuthService (SQLite)
-        // Simular delay em thread separada para não travar a UI
-
+        // Implementar Autenticação db futuramente
         try {
             if (email.equals("admin@clinica.com") && senha.equals("admin123")) {
                 NavigationUtil.navigateToMenu();

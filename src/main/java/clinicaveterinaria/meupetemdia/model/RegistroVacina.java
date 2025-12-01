@@ -2,15 +2,14 @@ package clinicaveterinaria.meupetemdia.model;
 
 import java.time.LocalDate;
 
-/**
- * Classe que representa uma aplicação de vacina em um pet
- */
+// Classe que representa uma aplicação de vacina em um pet
 public class RegistroVacina {
 
     private Integer id;
     private Integer petId;
     private String petNome; // Para exibição
     private String donoNome; // Para exibição
+    private String telefone; // Para envio notificacao
     private Integer vacinaId;
     private String vacinaNome; // Para exibição
     private LocalDate dataAplicacao;
@@ -18,10 +17,7 @@ public class RegistroVacina {
     private String veterinario;
     private String observacoes;
 
-    // ========== CONSTRUTORES ==========
-
-    public RegistroVacina() {
-    }
+    // CONSTRUTORES
 
     public RegistroVacina(Integer id, Integer petId, Integer vacinaId, LocalDate dataAplicacao,
                           LocalDate dataProximaDose, String veterinario, String observacoes) {
@@ -44,7 +40,11 @@ public class RegistroVacina {
         this.observacoes = observacoes;
     }
 
-    // ========== GETTERS E SETTERS ==========
+    public RegistroVacina() {
+
+    }
+
+    // GETTERS E SETTERS
 
     public Integer getId() {
         return id;
@@ -76,6 +76,14 @@ public class RegistroVacina {
 
     public void setDonoNome(String donoNome) {
         this.donoNome = donoNome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public Integer getVacinaId() {
@@ -126,11 +134,10 @@ public class RegistroVacina {
         this.observacoes = observacoes;
     }
 
-    // ========== MÉTODOS AUXILIARES ==========
+    // MÉTODOS AUXILIARES
 
-    /**
-     * Verifica se a vacina está vencida (próxima dose passou)
-     */
+
+    // Verifica se a vacina está vencida (próxima dose passou)
     public boolean isVencida() {
         if (dataProximaDose == null) {
             return false;
@@ -138,9 +145,8 @@ public class RegistroVacina {
         return dataProximaDose.isBefore(LocalDate.now());
     }
 
-    /**
-     * Verifica se a vacina está próxima do vencimento (30 dias)
-     */
+
+    // Verifica se a vacina está próxima do vencimento (30 dias)
     public boolean isProximaVencimento() {
         if (dataProximaDose == null) {
             return false;

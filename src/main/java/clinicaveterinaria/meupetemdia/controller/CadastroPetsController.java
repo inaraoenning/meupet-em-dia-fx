@@ -1,5 +1,10 @@
 package clinicaveterinaria.meupetemdia.controller;
 
+import clinicaveterinaria.meupetemdia.dao.DonoDAO;
+import clinicaveterinaria.meupetemdia.dao.PetDAO;
+import clinicaveterinaria.meupetemdia.model.Dono;
+import clinicaveterinaria.meupetemdia.model.Pet;
+import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -7,49 +12,65 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
-import clinicaveterinaria.meupetemdia.model.Dono;
-import clinicaveterinaria.meupetemdia.model.Pet;
-import clinicaveterinaria.meupetemdia.dao.DonoDAO;
-import clinicaveterinaria.meupetemdia.dao.PetDAO;
-import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-/**
- * Controller da tela de Cadastro de Pets
- */
+
+// Controller da tela de Cadastro de Pets
 public class CadastroPetsController {
 
     // ========== COMPONENTES DO FORMULÁRIO ==========
-    @FXML private TextField txtNome;
-    @FXML private ComboBox<String> cmbEspecie;
-    @FXML private TextField txtRaca;
-    @FXML private DatePicker dtpDataNascimento;
-    @FXML private ComboBox<Dono> cmbDono;
+    @FXML
+    private TextField txtNome;
+    @FXML
+    private ComboBox<String> cmbEspecie;
+    @FXML
+    private TextField txtRaca;
+    @FXML
+    private DatePicker dtpDataNascimento;
+    @FXML
+    private ComboBox<Dono> cmbDono;
 
-    @FXML private Label lblErroNome;
-    @FXML private Label lblErroEspecie;
-    @FXML private Label lblErroData;
-    @FXML private Label lblErroDono;
+    @FXML
+    private Label lblErroNome;
+    @FXML
+    private Label lblErroEspecie;
+    @FXML
+    private Label lblErroData;
+    @FXML
+    private Label lblErroDono;
 
-    @FXML private Button btnSalvar;
-    @FXML private Button btnLimpar;
-    @FXML private Button btnCancelar;
+    @FXML
+    private Button btnSalvar;
+    @FXML
+    private Button btnLimpar;
+    @FXML
+    private Button btnCancelar;
 
     // ========== COMPONENTES DA TABELA ==========
-    @FXML private TextField txtBuscar;
-    @FXML private TableView<Pet> tblPets;
-    @FXML private TableColumn<Pet, Integer> colId;
-    @FXML private TableColumn<Pet, String> colNome;
-    @FXML private TableColumn<Pet, String> colEspecie;
-    @FXML private TableColumn<Pet, String> colRaca;
-    @FXML private TableColumn<Pet, LocalDate> colDataNascimento;
-    @FXML private TableColumn<Pet, String> colDono;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private TableView<Pet> tblPets;
+    @FXML
+    private TableColumn<Pet, Integer> colId;
+    @FXML
+    private TableColumn<Pet, String> colNome;
+    @FXML
+    private TableColumn<Pet, String> colEspecie;
+    @FXML
+    private TableColumn<Pet, String> colRaca;
+    @FXML
+    private TableColumn<Pet, LocalDate> colDataNascimento;
+    @FXML
+    private TableColumn<Pet, String> colDono;
 
-    @FXML private Button btnEditar;
-    @FXML private Button btnExcluir;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnExcluir;
 
     // ========== DADOS ==========
     private ObservableList<Pet> listaPets;
@@ -77,9 +98,8 @@ public class CadastroPetsController {
         carregarPets();
     }
 
-    /**
-     * Configura as colunas da tabela
-     */
+
+    // Configura as colunas da tabela
     private void configurarTabela() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -109,9 +129,8 @@ public class CadastroPetsController {
         });
     }
 
-    /**
-     * Configura os ComboBoxes
-     */
+
+    // Configura os ComboBoxes
     private void configurarComboBoxes() {
         // ComboBox de Espécies
         cmbEspecie.setItems(FXCollections.observableArrayList(
@@ -135,9 +154,8 @@ public class CadastroPetsController {
         });
     }
 
-    /**
-     * Configura a busca em tempo real
-     */
+
+    // Configura a busca em tempo real
     private void configurarBusca() {
         txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> {
             if (petsFiltrados != null) {
@@ -155,9 +173,8 @@ public class CadastroPetsController {
         });
     }
 
-    /**
-     * Configura listeners para limpar erros
-     */
+
+    // Configura listeners para limpar erros
     private void configurarListeners() {
         txtNome.textProperty().addListener((obs, oldVal, newVal) ->
                 limparErro(txtNome, lblErroNome));
@@ -169,9 +186,8 @@ public class CadastroPetsController {
                 limparErro(cmbDono, lblErroDono));
     }
 
-    /**
-     * Carrega donos para o ComboBox
-     */
+
+    // Carrega donos para o ComboBox
     private void carregarDonos() {
         try {
             listaDonos = FXCollections.observableArrayList(donoDAO.findAll());
@@ -182,9 +198,8 @@ public class CadastroPetsController {
         }
     }
 
-    /**
-     * Carrega pets do banco
-     */
+
+    // Carrega pets do banco
     private void carregarPets() {
         try {
             listaPets = FXCollections.observableArrayList(petDAO.findAll());

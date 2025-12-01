@@ -4,13 +4,12 @@ import clinicaveterinaria.meupetemdia.config.DatabaseConfig;
 import clinicaveterinaria.meupetemdia.model.RegistroVacina;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO para operações com Registros de Vacinas (aplicações)
- */
+
+// DAO para operações com Registros de Vacinas (aplicações)
+
 public class RegistroVacinaDAO {
 
     public int insert(RegistroVacina registro) {
@@ -59,12 +58,14 @@ public class RegistroVacinaDAO {
 
     public List<RegistroVacina> findAll() {
         List<RegistroVacina> registros = new ArrayList<>();
-        String sql = "SELECT rv.*, p.nome as pet_nome, v.nome as vacina_nome, d.nome as dono_nome " +
+        String sql = "SELECT rv.*, p.nome AS pet_nome, v.nome AS vacina_nome, " +
+                "d.nome AS dono_nome, d.telefone AS dono_telefone " +
                 "FROM registros_vacinas rv " +
                 "INNER JOIN pets p ON rv.pet_id = p.id " +
                 "INNER JOIN vacinas v ON rv.vacina_id = v.id " +
                 "INNER JOIN donos d ON p.dono_id = d.id " +
                 "ORDER BY rv.data_aplicacao DESC";
+
 
         try (Connection conn = DatabaseConfig.connect();
              Statement stmt = conn.createStatement();
@@ -136,14 +137,8 @@ public class RegistroVacinaDAO {
         registro.setId(rs.getInt("id"));
         registro.setPetId(rs.getInt("pet_id"));
         registro.setPetNome(rs.getString("pet_nome"));
-
-        // Adicionar nome do dono se disponível
-        try {
-            registro.setDonoNome(rs.getString("dono_nome"));
-        } catch (SQLException e) {
-            // Se não houver a coluna, ignora
-        }
-
+        registro.setDonoNome(rs.getString("dono_nome"));
+        registro.setTelefone(rs.getString("dono_telefone"));
         registro.setVacinaId(rs.getInt("vacina_id"));
         registro.setVacinaNome(rs.getString("vacina_nome"));
         registro.setDataAplicacao(rs.getDate("data_aplicacao").toLocalDate());

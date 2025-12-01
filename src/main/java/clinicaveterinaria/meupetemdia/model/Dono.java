@@ -1,8 +1,7 @@
 package clinicaveterinaria.meupetemdia.model;
 
-/**
- * Classe que representa um Dono (proprietário de pet)
- */
+
+ // Classe Dono (proprietário de pet)
 public class Dono {
 
     private Integer id;

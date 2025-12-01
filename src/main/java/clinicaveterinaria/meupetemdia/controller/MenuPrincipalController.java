@@ -10,13 +10,12 @@ import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
-/**
- * Controller da tela de Menu Principal
- * Responsável pela navegação entre as funcionalidades do sistema
- */
+//Controller da tela de Menu Principal
+//Responsável pela navegação entre as funcionalidades do sistema
+
 public class MenuPrincipalController {
 
-    // ========== COMPONENTES FXML ==========
+    // COMPONENTES FXML
     @FXML
     private Label lblUsuario;
     @FXML
@@ -32,7 +31,7 @@ public class MenuPrincipalController {
     @FXML
     private VBox btnRelatorios;
 
-    // ========== INICIALIZAÇÃO ==========
+    // INICIALIZAÇÃO
     @FXML
     private void initialize() {
         // Carregar informações do usuário logado
@@ -42,76 +41,65 @@ public class MenuPrincipalController {
         adicionarEfeitosVisuais();
     }
 
-    /**
-     * Carrega o nome do usuário logado do Firebase
-     */
+
+    // Carrega o nome do usuário logado
     private void carregarInformacoesUsuario() {
-        // TODO: Integrar com FirebaseAuthService para pegar o usuário atual
+        // TODO: Integrar com AuthService para pegar o usuário atual
         // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // if (user != null) {
         //     lblUsuario.setText("Bem-vindo, " + user.getDisplayName());
         // }
 
         // SIMULAÇÃO TEMPORÁRIA
-        lblUsuario.setText("Bem-vindo, Dr. João Silva");
+        lblUsuario.setText("Bem-vindo");
     }
 
-    /**
-     * Adiciona efeitos visuais adicionais aos cards (opcional)
-     */
+
+    // Adiciona efeitos visuais adicionais aos cards (opcional)
     private void adicionarEfeitosVisuais() {
         // Aqui você pode adicionar animações ou efeitos extras
         // Por exemplo: animação de entrada dos cards
     }
 
-    // ========== NAVEGAÇÃO PARA TELAS ==========
+    // NAVEGAÇÃO PARA TELAS
 
-    /**
-     * Navega para a tela de Cadastro de Donos
-     */
+
+    // Navega para a tela de Cadastro de Donos
     @FXML
     private void handleCadastroDonos() {
         NavigationUtil.navigateToCadastroDonos();
     }
 
-    /**
-     * Navega para a tela de Cadastro de Pets
-     */
+
+    // Navega para a tela de Cadastro de Pets
     @FXML
     private void handleCadastroPets() {
         NavigationUtil.navigateToCadastroPets();
     }
 
-    /**
-     * Navega para a tela de Vacinas e Consultas
-     */
+
+    // Navega para a tela de Vacinas e Consultas
     @FXML
     private void handleVacinasConsultas() {
         NavigationUtil.navigateToCadastroVacinasConsultas();
     }
 
-    /**
-     * Navega para a tela de Próximas Vacinas
-     */
+
+    // Navega para a tela de Próximas Vacinas
     @FXML
     private void handleProximasVacinas() {
         NavigationUtil.navigateToProximasVacinas();
     }
 
-    /**
-     * Navega para a tela de Relatórios
-     */
+
+    // Navega para a tela de Relatórios
     @FXML
     private void handleRelatorios() {
         NavigationUtil.navigateToRelatorios();
     }
 
-    // ========== LOGOUT ==========
-
-    /**
-     * Realiza o logout do usuário
-     * Exibe confirmação antes de sair
-     */
+    // LOGOUT
+    // Realiza o logout do usuárioExibe confirmação antes de sair
     @FXML
     private void handleLogout() {
         // Mostrar confirmação
@@ -132,12 +120,10 @@ public class MenuPrincipalController {
         }
     }
 
-    /**
-     * Executa o processo de logout
-     */
+    // Executa o processo de logout
     private void realizarLogout() {
         try {
-            // TODO: Integrar com FirebaseAuthService
+            // TODO: Integrar com AuthService
             // FirebaseAuth.getInstance().signOut();
 
             // Limpar dados da sessão (se houver cache local)
@@ -152,17 +138,13 @@ public class MenuPrincipalController {
         }
     }
 
-    /**
-     * Limpa dados da sessão local
-     */
+
+    // TODO: Limpa dados da sessão local
     private void limparSessao() {
         // Limpar preferências, cache, ou dados temporários
-        // Por exemplo: SharedPreferences, variáveis estáticas, etc.
     }
 
-    /**
-     * Exibe mensagem de erro
-     */
+    // Exibe mensagem de erro
     private void mostrarErro(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erro");

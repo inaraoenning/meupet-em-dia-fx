@@ -7,9 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO para operações com Vacinas (tipos de vacinas disponíveis)
- */
+
+ // DAO para operações com Vacinas (tipos de vacinas disponíveis)
+
 public class VacinaDAO {
 
     public int insert(Vacina vacina) {

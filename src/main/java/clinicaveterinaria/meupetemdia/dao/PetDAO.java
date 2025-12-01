@@ -4,17 +4,17 @@ import clinicaveterinaria.meupetemdia.config.DatabaseConfig;
 import clinicaveterinaria.meupetemdia.model.Pet;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO para operações CRUD de Pets no SQLite
- */
+
+// DAO para operações CRUD de Pets no SQLite
+
 public class PetDAO {
 
     /**
      * Insere um novo pet no banco
+     *
      * @param pet Pet a ser inserido
      * @return ID gerado ou -1 em caso de erro
      */
@@ -51,6 +51,7 @@ public class PetDAO {
 
     /**
      * Atualiza um pet existente
+     *
      * @param pet Pet com dados atualizados
      * @return true se atualizado com sucesso
      */
@@ -81,6 +82,7 @@ public class PetDAO {
 
     /**
      * Exclui um pet pelo ID
+     *
      * @param id ID do pet
      * @return true se excluído com sucesso
      */
@@ -103,6 +105,7 @@ public class PetDAO {
 
     /**
      * Busca um pet pelo ID
+     *
      * @param id ID do pet
      * @return Pet encontrado ou null
      */
@@ -130,6 +133,7 @@ public class PetDAO {
 
     /**
      * Retorna todos os pets cadastrados
+     *
      * @return Lista de pets
      */
     public List<Pet> findAll() {
@@ -155,6 +159,7 @@ public class PetDAO {
 
     /**
      * Busca pets por nome (parcial)
+     *
      * @param nome Nome ou parte do nome
      * @return Lista de pets encontrados
      */
@@ -184,6 +189,7 @@ public class PetDAO {
 
     /**
      * Busca pets por dono
+     *
      * @param donoId ID do dono
      * @return Lista de pets do dono
      */
@@ -213,6 +219,7 @@ public class PetDAO {
 
     /**
      * Busca pets por espécie
+     *
      * @param especie Espécie do pet
      * @return Lista de pets da espécie
      */
@@ -242,6 +249,7 @@ public class PetDAO {
 
     /**
      * Converte ResultSet em objeto Pet
+     *
      * @param rs ResultSet do banco
      * @return Objeto Pet
      */

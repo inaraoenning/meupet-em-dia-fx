@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="clinicaveterinaria.meupetemdia.controller.CadastroDonosController"
@@ -21,18 +10,18 @@
             prefHeight="768.0"
             prefWidth="1024.0">
 
-    <!-- ========== BARRA SUPERIOR (HEADER) ========== -->
+    <!-- ========== (HEADER) ========== -->
     <top>
         <HBox fx:id="hboxHeader" styleClass="header-bar" alignment="CENTER">
             <padding>
-                <Insets top="15" right="30" bottom="15" left="30" />
+                <Insets top="15" right="30" bottom="15" left="30"/>
             </padding>
 
             <!-- Botão Voltar -->
             <Button fx:id="btnVoltar" text="← Voltar" styleClass="secondary-button"
                     onAction="#handleVoltar">
                 <HBox.margin>
-                    <Insets right="20" />
+                    <Insets right="20"/>
                 </HBox.margin>
             </Button>
 
@@ -47,78 +36,78 @@
     <center>
         <VBox fx:id="vboxPrincipal" spacing="25">
             <padding>
-                <Insets top="30" right="30" bottom="30" left="30" />
+                <Insets top="30" right="30" bottom="30" left="30"/>
             </padding>
 
             <!-- ========== SEÇÃO 1: FORMULÁRIO ========== -->
             <VBox fx:id="vboxFormulario" styleClass="card" spacing="15" maxWidth="800" alignment="TOP_CENTER">
                 <padding>
-                    <Insets top="25" right="30" bottom="25" left="30" />
+                    <Insets top="25" right="30" bottom="25" left="30"/>
                 </padding>
 
                 <!-- Subtítulo do Formulário -->
-                <Label fx:id="lblSubtituloForm" text="Dados do Proprietário" styleClass="section-title" />
+                <Label fx:id="lblSubtituloForm" text="Dados do Proprietário" styleClass="section-title"/>
 
                 <!-- Grid de Campos -->
                 <GridPane hgap="15" vgap="12">
                     <columnConstraints>
-                        <ColumnConstraints minWidth="120" prefWidth="120" />
-                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints minWidth="120" prefWidth="120"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
                     </columnConstraints>
 
                     <!-- LINHA 1: NOME -->
                     <Label text="Nome Completo:" styleClass="form-label"
-                           GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                           GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <TextField fx:id="txtNome" promptText="Digite o nome completo do proprietário"
-                                   styleClass="text-field" />
+                                   styleClass="text-field"/>
                         <Label fx:id="lblErroNome" styleClass="error-label"
-                               visible="false" managed="false" />
+                               visible="false" managed="false"/>
                     </VBox>
 
                     <!-- LINHA 2: TELEFONE -->
                     <Label text="Telefone:" styleClass="form-label"
-                           GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                     <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <TextField fx:id="txtTelefone" promptText="(00) 00000-0000"
-                                   styleClass="text-field" />
+                                   styleClass="text-field"/>
                         <Label fx:id="lblErroTelefone" styleClass="error-label"
-                               visible="false" managed="false" />
+                               visible="false" managed="false"/>
                     </VBox>
 
                     <!-- LINHA 3: E-MAIL -->
                     <Label text="E-mail:" styleClass="form-label"
-                           GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                     <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <TextField fx:id="txtEmail" promptText="email@exemplo.com"
-                                   styleClass="text-field" />
+                                   styleClass="text-field"/>
                         <Label fx:id="lblErroEmail" styleClass="error-label"
-                               visible="false" managed="false" />
+                               visible="false" managed="false"/>
                     </VBox>
 
                     <!-- LINHA 4: ENDEREÇO -->
                     <Label text="Endereço:" styleClass="form-label"
-                           GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                     <VBox spacing="3" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <TextArea fx:id="txtEndereco" promptText="Rua, número, bairro, cidade"
-                                  styleClass="text-area" prefRowCount="3" wrapText="true" />
+                                  styleClass="text-area" prefRowCount="3" wrapText="true"/>
                         <Label fx:id="lblErroEndereco" styleClass="error-label"
-                               visible="false" managed="false" />
+                               visible="false" managed="false"/>
                     </VBox>
                 </GridPane>
 
                 <!-- Botões do Formulário -->
                 <HBox fx:id="hboxBotoesForm" spacing="15" alignment="CENTER">
                     <VBox.margin>
-                        <Insets top="10" />
+                        <Insets top="10"/>
                     </VBox.margin>
 
                     <Button fx:id="btnSalvar" text="Salvar" styleClass="primary-button"
-                            onAction="#handleSalvar" />
+                            onAction="#handleSalvar"/>
                     <Button fx:id="btnLimpar" text="Limpar" styleClass="secondary-button"
-                            onAction="#handleLimpar" />
+                            onAction="#handleLimpar"/>
                     <Button fx:id="btnCancelar" text="Cancelar" styleClass="cancel-button"
-                            onAction="#handleCancelar" visible="false" managed="false" />
+                            onAction="#handleCancelar" visible="false" managed="false"/>
                 </HBox>
             </VBox>
 
@@ -128,7 +117,7 @@
                 <!-- Cabeçalho da Tabela -->
                 <HBox alignment="CENTER_LEFT" spacing="15">
                     <Label fx:id="lblSubtituloTabela" text="Donos Cadastrados"
-                           styleClass="section-title" />
+                           styleClass="section-title"/>
 
                     <!-- Campo de Busca -->
                     <TextField fx:id="txtBuscar" promptText="🔍 Buscar dono..."
@@ -140,23 +129,23 @@
                 <!-- Tabela -->
                 <TableView fx:id="tblDonos" styleClass="table-view" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colId" text="ID" prefWidth="60" />
-                        <TableColumn fx:id="colNome" text="Nome" prefWidth="200" />
-                        <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="140" />
-                        <TableColumn fx:id="colEmail" text="E-mail" prefWidth="200" />
-                        <TableColumn fx:id="colEndereco" text="Endereço" prefWidth="300" />
+                        <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+                        <TableColumn fx:id="colNome" text="Nome" prefWidth="200"/>
+                        <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="140"/>
+                        <TableColumn fx:id="colEmail" text="E-mail" prefWidth="200"/>
+                        <TableColumn fx:id="colEndereco" text="Endereço" prefWidth="300"/>
                     </columns>
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TableView>
 
                 <!-- Botões da Tabela -->
                 <HBox fx:id="hboxBotoesTabela" spacing="15" alignment="CENTER_LEFT">
                     <Button fx:id="btnEditar" text="Editar Selecionado" styleClass="secondary-button"
-                            onAction="#handleEditar" disable="true" />
+                            onAction="#handleEditar" disable="true"/>
                     <Button fx:id="btnExcluir" text="Excluir Selecionado" styleClass="danger-button"
-                            onAction="#handleExcluir" disable="true" />
+                            onAction="#handleExcluir" disable="true"/>
                 </HBox>
             </VBox>
 

@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO para operações com Consultas
- */
+
+ // DAO para operações com Consultas
+
 public class ConsultaDAO {
 
     public int insert(Consulta consulta) {

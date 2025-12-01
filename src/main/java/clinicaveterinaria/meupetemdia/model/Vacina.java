@@ -1,8 +1,7 @@
 package clinicaveterinaria.meupetemdia.model;
 
-/**
- * Classe que representa uma Vacina (tipo de vacina disponível)
- */
+
+// Classe tipo de vacina disponível
 public class Vacina {
 
     private Integer id;
@@ -10,8 +9,7 @@ public class Vacina {
     private String descricao;
     private Integer intervaloDiasReforco; // Dias até próxima dose
 
-    // ========== CONSTRUTORES ==========
-
+    // CONSTRUTORES
     public Vacina() {
     }
 
@@ -28,8 +26,7 @@ public class Vacina {
         this.intervaloDiasReforco = intervaloDiasReforco;
     }
 
-    // ========== GETTERS E SETTERS ==========
-
+    // GETTERS E SETTERS
     public Integer getId() {
         return id;
     }
@@ -62,7 +59,7 @@ public class Vacina {
         this.intervaloDiasReforco = intervaloDiasReforco;
     }
 
-    // ========== MÉTODOS AUXILIARES ==========
+    // MÉTODOS AUXILIARES
 
     @Override
     public String toString() {

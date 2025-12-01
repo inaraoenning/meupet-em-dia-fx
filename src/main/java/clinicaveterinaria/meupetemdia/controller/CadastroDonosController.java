@@ -1,50 +1,70 @@
 package clinicaveterinaria.meupetemdia.controller;
 
+import clinicaveterinaria.meupetemdia.dao.DonoDAO;
+import clinicaveterinaria.meupetemdia.model.Dono;
+import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import clinicaveterinaria.meupetemdia.model.Dono;
-import clinicaveterinaria.meupetemdia.dao.DonoDAO;
-import clinicaveterinaria.meupetemdia.util.NavigationUtil;
 
 import java.util.Optional;
 
-/**
- * Controller da tela de Cadastro de Donos
- */
+
+// Controller da tela de Cadastro de Donos
+
 public class CadastroDonosController {
 
-    // ========== COMPONENTES DO FORMULÁRIO ==========
-    @FXML private TextField txtNome;
-    @FXML private TextField txtTelefone;
-    @FXML private TextField txtEmail;
-    @FXML private TextArea txtEndereco;
+    // COMPONENTES DO FORMULÁRIO
+    @FXML
+    private TextField txtNome;
+    @FXML
+    private TextField txtTelefone;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextArea txtEndereco;
 
-    @FXML private Label lblErroNome;
-    @FXML private Label lblErroTelefone;
-    @FXML private Label lblErroEmail;
-    @FXML private Label lblErroEndereco;
+    @FXML
+    private Label lblErroNome;
+    @FXML
+    private Label lblErroTelefone;
+    @FXML
+    private Label lblErroEmail;
+    @FXML
+    private Label lblErroEndereco;
 
-    @FXML private Button btnSalvar;
-    @FXML private Button btnLimpar;
-    @FXML private Button btnCancelar;
+    @FXML
+    private Button btnSalvar;
+    @FXML
+    private Button btnLimpar;
+    @FXML
+    private Button btnCancelar;
 
-    // ========== COMPONENTES DA TABELA ==========
-    @FXML private TextField txtBuscar;
-    @FXML private TableView<Dono> tblDonos;
-    @FXML private TableColumn<Dono, Integer> colId;
-    @FXML private TableColumn<Dono, String> colNome;
-    @FXML private TableColumn<Dono, String> colTelefone;
-    @FXML private TableColumn<Dono, String> colEmail;
-    @FXML private TableColumn<Dono, String> colEndereco;
+    // COMPONENTES DA TABELA
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private TableView<Dono> tblDonos;
+    @FXML
+    private TableColumn<Dono, Integer> colId;
+    @FXML
+    private TableColumn<Dono, String> colNome;
+    @FXML
+    private TableColumn<Dono, String> colTelefone;
+    @FXML
+    private TableColumn<Dono, String> colEmail;
+    @FXML
+    private TableColumn<Dono, String> colEndereco;
 
-    @FXML private Button btnEditar;
-    @FXML private Button btnExcluir;
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnExcluir;
 
-    // ========== DADOS ==========
+    // DADOS
     private ObservableList<Dono> listaDonos;
     private FilteredList<Dono> donosFiltrados;
 
@@ -53,7 +73,7 @@ public class CadastroDonosController {
 
     private final DonoDAO donoDAO = new DonoDAO();
 
-    // ========== INICIALIZAÇÃO ==========
+    // INICIALIZAÇÃO
     @FXML
     private void initialize() {
         configurarTabela();
@@ -63,9 +83,8 @@ public class CadastroDonosController {
         carregarDonos();
     }
 
-    /**
-     * Configura as colunas da tabela
-     */
+
+    // Configura as colunas da tabela
     private void configurarTabela() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -80,9 +99,7 @@ public class CadastroDonosController {
         });
     }
 
-    /**
-     * Configura a busca em tempo real
-     */
+    //Configura a busca em tempo real
     private void configurarBusca() {
         txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> {
             if (donosFiltrados != null) {
@@ -100,9 +117,7 @@ public class CadastroDonosController {
         });
     }
 
-    /**
-     * Máscaras para telefone
-     */
+    //Máscaras para telefone
     private void configurarMascaras() {
         txtTelefone.textProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null) return;
@@ -128,9 +143,7 @@ public class CadastroDonosController {
         });
     }
 
-    /**
-     * Limpa erros ao digitar
-     */
+    //Limpa erros ao digitar
     private void configurarListeners() {
         txtNome.textProperty().addListener((obs, o, n) -> limparErro(txtNome, lblErroNome));
         txtTelefone.textProperty().addListener((obs, o, n) -> limparErro(txtTelefone, lblErroTelefone));
@@ -138,16 +151,14 @@ public class CadastroDonosController {
         txtEndereco.textProperty().addListener((obs, o, n) -> limparErro(txtEndereco, lblErroEndereco));
     }
 
-    /**
-     * CARREGA DADOS DO BANCO
-     */
+    //CARREGA DADOS DO BANCO
     private void carregarDonos() {
         listaDonos = FXCollections.observableArrayList(donoDAO.findAll());
         donosFiltrados = new FilteredList<>(listaDonos, p -> true);
         tblDonos.setItems(donosFiltrados);
     }
 
-    // ========== AÇÕES ==========
+    // AÇÕES
     @FXML
     private void handleVoltar() {
         NavigationUtil.navigateToMenu();
@@ -213,7 +224,7 @@ public class CadastroDonosController {
         }
     }
 
-    // ========== CRUD REAL NO BANCO ==========
+    // CRUD REAL NO BANCO
 
     private void inserirDonoBanco() {
         Dono novo = new Dono();
@@ -236,7 +247,7 @@ public class CadastroDonosController {
         donoDAO.update(donoEmEdicao);
     }
 
-    // ========== AUXILIARES ==========
+    // AUXILIARES
 
     private void preencherFormulario(Dono d) {
         txtNome.setText(d.getNome());
