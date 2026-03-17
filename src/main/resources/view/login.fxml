@@ -11,7 +11,7 @@
     <VBox alignment="CENTER" prefHeight="169.0" prefWidth="1024.0" spacing="10">
         <ImageView fx:id="imgLogo" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
 
-             <image><Image url="@../img/logo.png" /></image>
+             <image><Image url="@../img/MEU%20PET%20EM%20DIA.png" /></image>
         </ImageView>
 
         <Label fx:id="lblTitulo" styleClass="app-title" text="Meu Pet em Dia" />
@@ -56,7 +56,7 @@
     </VBox>
 
     <!-- RODAPÉ (OPCIONAL) -->
-    <Label styleClass="info-label" text="© 2025 Clínica Veterinária - Todos os direitos reservados">
+    <Label styleClass="info-label" text="© 2026 Clínica Veterinária - Todos os direitos reservados">
         <VBox.margin>
             <Insets top="30" />
         </VBox.margin>

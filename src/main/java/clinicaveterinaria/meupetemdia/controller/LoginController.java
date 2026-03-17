@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 
 //Controller da tela de Login
 //Responsável pela autenticação
-
 public class LoginController {
 
     // COMPONENTES

@@ -37,9 +37,8 @@
 ## 🎨 **FUNCIONALIDADES IMPLEMENTADAS**
 
 ### **Gerais:**
-- ✅ Autenticação com hash SHA-256
 - ✅ Banco SQLite local
-- ✅ Navegação fluida entre telas
+- ✅ Navegação entre telas
 - ✅ Paleta de cores personalizada
 - ✅ Validações em tempo real
 - ✅ Máscaras de entrada (telefone)
@@ -60,7 +59,7 @@
 
 ---
 
-## 🚀 **MELHORIAS FUTURAS (OPCIONAL)**
+## 🚀 **MELHORIAS FUTURAS**
 
 Se quiser expandir o sistema:
 
@@ -72,6 +71,7 @@ Se quiser expandir o sistema:
 6. **Controle de estoque** de medicamentos
 7. **Múltiplos usuários** com permissões
 8. **Impressão de carteirinhas** de vacinação
+9. **Autenticação com hash SHA-256**
 
 ---
 

@@ -12,12 +12,11 @@ import java.util.List;
 
 public class DonoDAO {
 
-    /**
-     * Insere um novo dono no banco
-     *
-     * @param dono Dono a ser inserido
-     * @return ID gerado ou -1 em caso de erro
-     */
+
+     //Insere um novo dono no banco
+     //@param dono Dono a ser inserido
+     //@return ID gerado ou -1 em caso de erro
+
     public int insert(Dono dono) {
         String sql = "INSERT INTO donos (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
 
@@ -46,12 +45,11 @@ public class DonoDAO {
         return -1;
     }
 
-    /**
-     * Atualiza um dono existente
-     *
-     * @param dono Dono com dados atualizados
-     * @return true se atualizado com sucesso
-     */
+
+     //Atualiza um dono existente
+
+     //@param dono Dono com dados atualizados
+     //@return true se atualizado com sucesso
     public boolean update(Dono dono) {
         String sql = "UPDATE donos SET nome = ?, telefone = ?, email = ?, endereco = ?, " +
                 "data_atualizacao = CURRENT_TIMESTAMP WHERE id = ?";
